@@ -33,7 +33,6 @@ enum layers {
 enum custom_keycodes {
     KC_BASE = SAFE_RANGE,
     KC_MAC,
-    KC_CSFT, // Custom shift
     KC_LOWER,
     KC_RAISE,
     KC_PRVWD,
@@ -41,24 +40,36 @@ enum custom_keycodes {
     KC_LSTRT,
     KC_LEND,
     KC_DLINE,
+};
 
-    // Keycodes for shifted punctuation and numbers in Dvorak
-    KC_DV_PERC,
-    KC_DV_0,
-    KC_DV_1,
-    KC_DV_2,
-    KC_DV_3,
-    KC_DV_4,
-    KC_DV_5,
-    KC_DV_6,
-    KC_DV_7,
-    KC_DV_8,
-    KC_DV_9,
-    KC_DV_CIRC,
-    KC_DV_PIPE,
-    KC_DV_TILD,
-    KC_DV_QUES,
-    KC_DV_UNDS
+// Key overrides for programmer dvorak shifted numbers
+const key_override_t pd_perc_override = ko_make_basic(MOD_MASK_SHIFT, KC_AMPR, KC_PERC);
+const key_override_t pd_7_override = ko_make_basic(MOD_MASK_SHIFT, KC_LBRACKET, KC_7);
+const key_override_t pd_5_override = ko_make_basic(MOD_MASK_SHIFT, KC_LCBR, KC_5);
+const key_override_t pd_3_override = ko_make_basic(MOD_MASK_SHIFT, KC_RCBR, KC_3);
+const key_override_t pd_1_override = ko_make_basic(MOD_MASK_SHIFT, KC_LPRN, KC_1);
+const key_override_t pd_9_override = ko_make_basic(MOD_MASK_SHIFT, KC_EQUAL, KC_9);
+const key_override_t pd_circ_override = ko_make_basic(MOD_MASK_SHIFT, KC_AT, KC_CIRC);
+const key_override_t pd_0_override = ko_make_basic(MOD_MASK_SHIFT, KC_ASTR, KC_0);
+const key_override_t pd_2_override = ko_make_basic(MOD_MASK_SHIFT, KC_RPRN, KC_2);
+const key_override_t pd_4_override = ko_make_basic(MOD_MASK_SHIFT, KC_PLUS, KC_4);
+const key_override_t pd_6_override = ko_make_basic(MOD_MASK_SHIFT, KC_RBRACKET, KC_6);
+const key_override_t pd_8_override = ko_make_basic(MOD_MASK_SHIFT, KC_EXLM, KC_8);
+
+const key_override_t **key_overrides = (const key_override_t *[]) {
+    &pd_perc_override,
+    &pd_7_override,
+    &pd_5_override,
+    &pd_3_override,
+    &pd_1_override,
+    &pd_9_override,
+    &pd_circ_override,
+    &pd_0_override,
+    &pd_2_override,
+    &pd_4_override,
+    &pd_6_override,
+    &pd_8_override,
+    NULL
 };
 
 /*
@@ -74,19 +85,11 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[_BASE] = LAYOUT(
-      KC_AMPR , KC_LBRACKET            , KC_LCBR   , KC_RCBR    , KC_LPRN     , KC_EQUAL ,                                         KC_ASTR , KC_RPRN , KC_PLUS , KC_RBRACKET , KC_EXLM  , KC_GRAVE ,
-      KC_TAB  , KC_SCOLON              , KC_COMMA  , KC_DOT     , KC_P        , KC_Y     , KC_AT   ,                     KC_BSLS , KC_G    , KC_R    , KC_R    , KC_R        , KC_L     , KC_SLASH ,
-      KC_ESC  , KC_A                   , KC_S      , KC_E       , KC_U        , KC_I     , KC_HOME ,                     KC_END  , KC_H    , KC_T    , KC_N    , KC_N        , KC_S     , KC_MINUS ,
-      KC_CSFT , MT(MOD_LSFT, KC_QUOTE) , KC_Q      , KC_J       , KC_K        , KC_X     , KC_LALT , KC_MUTE , RGB_TOG , KC_LGUI , KC_B    , KC_M    , KC_W    , KC_V        , KC_Z     , KC_CSFT  ,
-      KC_LCTL , KC_MEH                 , KC_PC_CUT , KC_PC_COPY , KC_PC_PASTE ,            KC_BSPC , KC_DEL  , KC_ENT  , KC_SPC  ,           KC_LEFT , KC_DOWN , KC_UP       , KC_RIGHT , KC_RCTRL
-    ),
-
-    [_SHIFT] = LAYOUT(
-        _______ , _______ , _______ , _______ , _______ , _______ ,                                         _______ , _______ , _______ , _______ , _______ , _______ ,
-        _______ , _______ , _______ , _______ , _______ , _______ , _______ ,                     _______ , _______ , _______ , _______ , _______ , _______ , _______ ,
-        _______ , _______ , _______ , _______ , _______ , _______ , _______ ,                     _______ , _______ , _______ , _______ , _______ , _______ , _______ ,
-        _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ ,
-        _______ , _______ , _______ , _______ , _______ ,           _______ , _______ , _______ , _______ ,           _______ , _______ , _______ , _______ , _______
+      KC_AMPR , KC_LBRACKET , KC_LCBR   , KC_RCBR    , KC_LPRN     , KC_EQUAL ,                                         KC_ASTR , KC_RPRN , KC_PLUS , KC_RBRACKET , KC_EXLM  , KC_GRAVE ,
+      KC_TAB  , KC_SCOLON   , KC_COMMA  , KC_DOT     , KC_P        , KC_Y     , KC_AT   ,                     KC_BSLS , KC_F    , KC_G    , KC_C    , KC_R        , KC_L     , KC_SLASH ,
+      KC_ESC  , KC_A        , KC_O      , KC_E       , KC_U        , KC_I     , KC_HOME ,                     KC_END  , KC_D    , KC_H    , KC_T    , KC_N        , KC_S     , KC_MINUS ,
+      KC_LSFT , KC_QUOTE    , KC_Q      , KC_J       , KC_K        , KC_X     , KC_LALT , KC_MUTE , RGB_TOG , KC_LGUI , KC_B    , KC_M    , KC_W    , KC_V        , KC_Z     , KC_RSFT  ,
+      KC_LCTL , KC_MEH      , KC_PC_CUT , KC_PC_COPY , KC_PC_PASTE ,            KC_BSPC , KC_DEL  , KC_ENT  , KC_SPC  ,           KC_LEFT , KC_DOWN , KC_UP       , KC_RIGHT , KC_RCTRL
     ),
 
 	[_LOWER] = LAYOUT(
@@ -153,9 +156,6 @@ static void print_status_narrow(void) {
         case _LOWER:
             oled_write_P(PSTR("Lower"), false);
             break;
-        case _SHIFT:
-            oled_write_P(PSTR("Shift"), false);
-            break;
         default:
             oled_write_ln_P(PSTR("Undef"), false);
     }
@@ -209,24 +209,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 layer_off(_RAISE);
             }
             return false;
-        case KC_CSFT:
-            if (record->event.pressed) {
-                layer_on(_SHIFT);
-                register_code(KC_LSFT);
-            } else {
-                layer_off(_SHIFT);
-                unregister_code(KC_LSFT);
-            }
-            return false;
-        case KC_DV_PERC ... KC_DV_UNDS:
-            // Dvorak shifted keycodes will be sent while the _SHIFT
-            // layer is active, via KC_CSFT. This means we need to 
-            // un-register KC_LSFT while these keys are pressed
-            if (record->event.pressed) {
-
-            }
-
-            break;
         case KC_PRVWD:
             if (record->event.pressed) {
                 if (keymap_config.swap_lctl_lgui) {
