@@ -1,0 +1,9 @@
+OLED_DRIVER_ENABLE = yes
+RGBLIGHT_ENABLE = yes
+MOUSEKEY_ENABLE = no
+VIA_ENABLE = no
+EXTRAKEY_ENABLE = yes 
+
+# Disable unsupported hardware
+AUDIO_SUPPORTED = no
+BACKLIGHT_SUPPORTED = no

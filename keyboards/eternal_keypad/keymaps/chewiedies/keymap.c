@@ -15,10 +15,20 @@
  */
 #include QMK_KEYBOARD_H
 
+enum custom_keycodes {
+    BSPREV = SAFE_RANGE,
+    BSNEXT,
+    BSPLAY,
+    BSTHMUP,
+    BSTHMDN,
+    YTMUSIC
+};
+
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
     _BASE = 0,
     _FN,
+    _MEDIA,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -44,14 +54,94 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_FN] = LAYOUT(
-                  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  RGB_TOG,  RGB_MOD,  XXXXXXX,
-		          XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  RGB_HUD,  RGB_HUI,  XXXXXXX,
-		XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  RGB_VAD,  RGB_VAI,  XXXXXXX,
-		XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  RGB_SAD,  RGB_SAI,  XXXXXXX,
-		RESET,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                      XXXXXXX
+                  _______,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,
+		          XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  RGB_HUD,  RGB_HUI,  KC_F7,
+     DF(_MEDIA),  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  RGB_VAD,  RGB_VAI,  KC_F9,
+		XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  RGB_SAD,  RGB_SAI,  KC_F10,
+		RESET,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                      _______
+    ),
+    [_MEDIA] = LAYOUT(
+                  DF(_BASE),XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+		          XXXXXXX,  XXXXXXX,  KC_WH_U,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+		YTMUSIC,  XXXXXXX,  KC_WH_L,  KC_WH_D,  KC_WH_R,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+		KC_VOLU,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+		KC_VOLD,  BSTHMDN,  BSTHMUP,  BSPREV,             BSPLAY,             BSNEXT
     ),
 };
 
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case BSPREV:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+                register_code(KC_LGUI);
+                register_code(KC_PGDN);
+            } else {
+                unregister_code(KC_LSFT);
+                unregister_code(KC_LGUI);
+                unregister_code(KC_PGDN);
+            }
+            break;
+        case BSNEXT:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+                register_code(KC_LGUI);
+                register_code(KC_PGUP);
+            } else {
+                unregister_code(KC_LSFT);
+                unregister_code(KC_LGUI);
+                unregister_code(KC_PGUP);
+            }
+            break;
+        case BSPLAY:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+                register_code(KC_LGUI);
+                register_code(KC_SPC);
+            } else {
+                unregister_code(KC_LSFT);
+                unregister_code(KC_LGUI);
+                unregister_code(KC_SPC);
+            }
+            break;
+        case BSTHMDN:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+                register_code(KC_LGUI);
+                register_code(KC_D);
+            } else {
+                unregister_code(KC_LSFT);
+                unregister_code(KC_LGUI);
+                unregister_code(KC_D);
+            }
+            break;
+        case BSTHMUP:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+                register_code(KC_LGUI);
+                register_code(KC_L);
+            } else {
+                unregister_code(KC_LSFT);
+                unregister_code(KC_LGUI);
+                unregister_code(KC_L);
+            }
+            break;
+        case YTMUSIC:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+                register_code(KC_LGUI);
+                register_code(KC_LCTL);
+                register_code(KC_Y);
+            } else {
+                unregister_code(KC_LSFT);
+                unregister_code(KC_LGUI);
+                unregister_code(KC_LCTL);
+                unregister_code(KC_Y);
+            }
+            break;
+    }
+    return true;
+}
 // Runs just one time when the keyboard initializes.
 void matrix_scan_user(void) {
     static bool has_ran_yet = false;

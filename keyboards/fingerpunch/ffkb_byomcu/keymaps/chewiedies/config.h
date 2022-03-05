@@ -1,0 +1,10 @@
+#define PERMISSIVE_HOLD
+
+#undef TAPPING_TERM
+#define TAPPING_TERM 200
+
+#undef ENCODERS_PAD_A
+#define ENCODERS_PAD_A {D5, B6, D0}
+
+#undef ENCODERS_PAD_B
+#define ENCODERS_PAD_B {B7, F1, D1}

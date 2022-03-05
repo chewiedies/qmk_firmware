@@ -19,6 +19,7 @@ enum layer_names {
 #define NUMMIN LT(_NUM, KC_MINS)
 #define SFTENT MT(MOD_RSFT, KC_ENT)
 #define CTLESC MT(MOD_LCTL, KC_ESC)
+#define SFTSPC MT(MOD_LSFT, KC_SPC)
 
 enum custom_keycodes {
     QWERTY = SAFE_RANGE,
@@ -66,8 +67,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_GRV,             KC_BSLS,  KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     ADJUST,
     KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_VOLD,            KC_VOLU,  KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_BSPC,
     CTLESC,   KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_MINS,            KC_EQL,   KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,
-    KC_LSFT,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_LCBR,            KC_RCBR,  KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  SFTENT,
-                        PSTBRD,   KC_LGUI,  RAISE,    KC_SPC,   NUMENT,             NUMMIN,   KC_SPC,   LOWER,    KC_RALT,  KC_MUTE
+    XXXXXXX,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_LCBR,            KC_RCBR,  KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  SFTENT,
+                        PSTBRD,   KC_LGUI,  RAISE,    SFTSPC,   NUMENT,             NUMMIN,   KC_SPC,   LOWER,    KC_RALT,  KC_MUTE
 ),
 
 
@@ -75,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,  KC_IMP,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_TILD,            KC_PIPE,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
     XXXXXXX,  KC_EXLM,  KC_AT,    KC_HASH,  KC_DLR,   KC_PERC,  XXXXXXX,            XXXXXXX,  KC_CIRC,  KC_AMPR,  KC_ASTR,  KC_LPRN,  KC_RPRN,  _______,
     KC_CAPS,  XXXXXXX,  KC_CLAW,  KC_LPRN,  KC_RPRN,  XXXXXXX,  KC_UNDS,            KC_PLUS,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_LCBR,  KC_RCBR,  XXXXXXX,  KC_LBRC,            KC_RBRC,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    KC_LSFT,  XXXXXXX,  XXXXXXX,  KC_LCBR,  KC_RCBR,  XXXXXXX,  KC_LBRC,            KC_RBRC,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
                         SCRNCAP,  XXXXXXX,  _______,  _______,  _______,            _______,  _______,  _______,  XXXXXXX,  XXXXXXX
 ),
 
@@ -84,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
     KC_SFTB,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,  KC_PRVWD, KC_UP,    KC_NXTWD, XXXXXXX,  KC_DEL,
     KC_UNDO,  KC_REDO,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,  KC_LEFT,  KC_DOWN,  KC_RGHT,  XXXXXXX,  XXXXXXX,
-    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BSPC,  XXXXXXX,            XXXXXXX,  XXXXXXX,  KC_LSTRT, XXXXXXX,  KC_LEND,  XXXXXXX,  XXXXXXX,
+    KC_LSFT,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BSPC,  KC_LBRC,            KC_RBRC,  XXXXXXX,  KC_LSTRT, XXXXXXX,  KC_LEND,  XXXXXXX,  KC_RSFT,
                         _______,  _______,  _______,  _______,  _______,            _______,  _______,  _______,  _______,  _______
 ),
 
