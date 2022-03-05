@@ -21,20 +21,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KC_PC_CUT LCTL(KC_X)
 #define KC_PC_COPY LCTL(KC_C)
 #define KC_PC_PASTE LCTL(KC_V)
-#define ES_LESS_MAC KC_GRAVE
-#define ES_GRTR_MAC LSFT(KC_GRAVE)
-#define ES_BSLS_MAC ALGR(KC_6)
-#define NO_PIPE_ALT KC_GRAVE
-#define NO_BSLS_ALT KC_EQUAL
-#define LSA_T(kc) MT(MOD_LSFT | MOD_LALT, kc)
-#define BP_NDSH_MAC ALGR(KC_8)
-#define SE_SECT_MAC ALGR(KC_6)
 
 enum layers {
     _BASE,
     _MAC,
+    _LOWER,
+    _RAISE,
     _SHIFT,
-    _NUMPAD,
 };
 
 enum custom_keycodes {
@@ -43,89 +36,74 @@ enum custom_keycodes {
     KC_CSFT, // Custom shift
     KC_LOWER,
     KC_RAISE,
-    KC_ADJUST,
     KC_PRVWD,
     KC_NXTWD,
     KC_LSTRT,
     KC_LEND,
-    KC_DLINE
+    KC_DLINE,
+
+    // Keycodes for shifted punctuation and numbers in Dvorak
+    KC_DV_PERC,
+    KC_DV_0,
+    KC_DV_1,
+    KC_DV_2,
+    KC_DV_3,
+    KC_DV_4,
+    KC_DV_5,
+    KC_DV_6,
+    KC_DV_7,
+    KC_DV_8,
+    KC_DV_9,
+    KC_DV_CIRC,
+    KC_DV_PIPE,
+    KC_DV_TILD,
+    KC_DV_QUES,
+    KC_DV_UNDS
 };
 
 /*
-[_MAC] = LAYOUT(
-      _______ , _______ , _______ , _______ , _______ , _______ ,                                         _______ , _______ , _______ , _______ , _______ , _______ ,
-      _______ , _______ , _______ , _______ , _______ , _______ , _______ ,                     _______ , _______ , _______ , _______ , _______ , _______ , _______ ,
-      _______ , _______ , _______ , _______ , _______ , _______ , _______ ,                     _______ , _______ , _______ , _______ , _______ , _______ , _______ ,
-      _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ ,
-      _______ , _______ , _______ , _______ , _______ ,           _______ , _______ , _______ , _______ ,           _______ , _______ , _______ , _______ , _______
-    ),
+[] = LAYOUT(
+    _______ , _______ , _______ , _______ , _______ , _______ ,                                         _______ , _______ , _______ , _______ , _______ , _______ ,
+    _______ , _______ , _______ , _______ , _______ , _______ , _______ ,                     _______ , _______ , _______ , _______ , _______ , _______ , _______ ,
+    _______ , _______ , _______ , _______ , _______ , _______ , _______ ,                     _______ , _______ , _______ , _______ , _______ , _______ , _______ ,
+    _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ ,
+    _______ , _______ , _______ , _______ , _______ ,           _______ , _______ , _______ , _______ ,           _______ , _______ , _______ , _______ , _______
+),
 */
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-    [_BASE] = LAYOUT(
-      KC_AMPR   , KC_LBRACKET            , KC_LCBR   , KC_RCBR    , KC_LPRN           , KC_EQUAL ,                                               KC_ASTR , KC_RPRN , KC_PLUS , KC_RBRACKET , KC_EXLM  , KC_GRAVE ,
-      KC_TAB    , KC_SCOLON              , KC_COMMA  , KC_DOT     , KC_P              , KC_Y     , KC_AT     ,                       KC_BSLASH , KC_F    , KC_G    , KC_C    , KC_R        , KC_L     , KC_SLASH ,
-      KC_ESCAPE , KC_A                   , KC_O      , KC_E       , LT(_NUMPAD, KC_U) , KC_I     , KC_HOME   ,                       KC_END    , KC_D    , KC_H    , KC_T    , KC_N        , KC_S     , KC_MINUS ,
-      KC_CSFT   , MT(MOD_LSFT, KC_QUOTE) , KC_Q      , KC_J       , KC_K              , KC_X     , KC_LALT   , KC_MUTE   , RGB_TOG , KC_LGUI   , KC_B    , KC_M    , KC_W    , KC_V        , KC_Z     , MO(_SHIFT)  ,
-      KC_LCTL   , KC_MEH                 , KC_PC_CUT , KC_PC_COPY , KC_PC_PASTE       ,            KC_BSPACE , KC_DELETE , KC_ENT  , KC_SPC    ,           KC_LEFT , KC_DOWN , KC_UP       , KC_RIGHT , KC_RCTRL
-    ),
-
-    [_MAC] = LAYOUT(
-      _______ , _______  , _______    , _______     , _______      , _______ ,                                                _______ , _______ , _______ , _______ , _______ , _______ ,
-      _______ , _______  , _______    , _______     , _______      , _______ , _______ ,                     _______        , _______ , _______ , _______ , _______ , _______ , _______ ,
-      _______ , _______  , _______    , _______     , _______      , _______ , _______ ,                     _______        , _______ , _______ , _______ , _______ , _______ , _______ ,
-      _______ , _______  , _______    , _______     , _______      , _______ , _______ , _______ , _______ , LGUI(KC_SPACE) , _______ , _______ , _______ , _______ , _______ , _______ ,
-      KC_LGUI , KC_LCTRL , KC_MAC_CUT , KC_MAC_COPY , KC_MAC_PASTE ,           _______ , _______ , _______ , _______ ,                  _______ , _______ , _______ , _______ , KC_RGUI
+	[_BASE] = LAYOUT(
+      KC_AMPR , KC_LBRACKET            , KC_LCBR   , KC_RCBR    , KC_LPRN     , KC_EQUAL ,                                         KC_ASTR , KC_RPRN , KC_PLUS , KC_RBRACKET , KC_EXLM  , KC_GRAVE ,
+      KC_TAB  , KC_SCOLON              , KC_COMMA  , KC_DOT     , KC_P        , KC_Y     , KC_AT   ,                     KC_BSLS , KC_G    , KC_R    , KC_R    , KC_R        , KC_L     , KC_SLASH ,
+      KC_ESC  , KC_A                   , KC_S      , KC_E       , KC_U        , KC_I     , KC_HOME ,                     KC_END  , KC_H    , KC_T    , KC_N    , KC_N        , KC_S     , KC_MINUS ,
+      KC_CSFT , MT(MOD_LSFT, KC_QUOTE) , KC_Q      , KC_J       , KC_K        , KC_X     , KC_LALT , KC_MUTE , RGB_TOG , KC_LGUI , KC_B    , KC_M    , KC_W    , KC_V        , KC_Z     , KC_CSFT  ,
+      KC_LCTL , KC_MEH                 , KC_PC_CUT , KC_PC_COPY , KC_PC_PASTE ,            KC_BSPC , KC_DEL  , KC_ENT  , KC_SPC  ,           KC_LEFT , KC_DOWN , KC_UP       , KC_RIGHT , KC_RCTRL
     ),
 
     [_SHIFT] = LAYOUT(
-      KC_PERC , KC_7    , KC_5    , KC_3    , KC_1    , KC_9    ,                                         KC_0    , KC_2    , KC_4    , KC_6    , KC_8    , KC_TILD ,
-      _______ , _______ , _______ , _______ , _______ , _______ , KC_CIRC ,                     KC_PIPE , _______ , _______ , _______ , _______ , _______ , KC_QUES ,
-      _______ , _______ , _______ , _______ , _______ , _______ , _______ ,                     _______ , _______ , _______ , _______ , _______ , _______ , KC_UNDS ,
-      _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ ,
-      _______ , _______ , _______ , _______ , _______ ,           _______ , _______ , _______ , _______ ,           _______ , _______ , _______ , _______ , _______
+        _______ , _______ , _______ , _______ , _______ , _______ ,                                         _______ , _______ , _______ , _______ , _______ , _______ ,
+        _______ , _______ , _______ , _______ , _______ , _______ , _______ ,                     _______ , _______ , _______ , _______ , _______ , _______ , _______ ,
+        _______ , _______ , _______ , _______ , _______ , _______ , _______ ,                     _______ , _______ , _______ , _______ , _______ , _______ , _______ ,
+        _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ ,
+        _______ , _______ , _______ , _______ , _______ ,           _______ , _______ , _______ , _______ ,           _______ , _______ , _______ , _______ , _______
     ),
 
-    [_NUMPAD] = LAYOUT(
-      _______ , _______ , _______ , _______ , _______ , _______ ,                                         _______ , _______ , KC_KP_PLUS , KC_KP_ASTERISK , KC_KP_MINUS , _______     ,
-      _______ , _______ , _______ , _______ , _______ , _______ , _______ ,                     _______ , _______ , KC_7    , KC_8       , KC_9           , KC_KP_PLUS  , _______     ,
-      _______ , _______ , _______ , _______ , _______ , _______ , _______ ,                     _______ , _______ , KC_4    , KC_5       , KC_6           , KC_KP_PLUS  , _______     ,
-      _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , KC_1    , KC_2       , KC_3           , KC_KP_ENTER , KC_KP_ENTER ,
-      _______ , _______ , _______ , _______ , _______ ,           _______ , _______ , _______ , _______ ,           KC_0    , KC_0       , KC_DOT         , KC_KP_ENTER , _______
-    ),
+	[_LOWER] = LAYOUT(
+      _______, KC_F1, KC_F2, KC_F3, KC_F4,   KC_F5,                                KC_F6,   KC_F7,   KC_F8, KC_F9, KC_F10, KC_F11,
+      KC_PSLS, KC_P7, KC_P8, KC_P9, KC_NLCK, _______, _______,                   _______, _______, KC_PSLS, KC_P7, KC_P8, KC_P9, KC_F12,
+      KC_CAPS, KC_P4, KC_P5, KC_P6, KC_NLCK, _______, _______,                   _______, _______, _______, KC_P4, KC_P5, KC_P6, KC_NLCK,
+      _______, KC_P1, KC_P2, KC_P3, _______, _______, _______, _______,  _______, _______, _______, _______, KC_P1, KC_P2, KC_P3, _______,
+      _______, KC_P0, KC_PDOT, KC_PENT, _______,     _______,  _______,   _______,    _______,   _______, KC_P0, KC_PDOT, KC_PENT, _______
+      ),
 
-	// [_QWERTY] = LAYOUT(
-    //   KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                           KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
-    //   KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,  KC_LBRC,                       KC_RBRC,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
-    //   KC_ADJUST, KC_A,  KC_S,    KC_D,    KC_F,    KC_G,  KC_MINS,                       KC_EQL,  KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-    //   KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,  KC_GRV, KC_MUTE,      RGB_TOG, KC_DEL,KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,
-    //   KC_LCTL, KC_LALT, KC_LGUI, LALT(KC_TAB), KC_LOWER,  KC_SPC,   KC_ENT,    KC_ENT,   KC_SPC,  KC_RAISE,    KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
-    // ),
-
-	// [_LOWER] = LAYOUT(
-    //   _______, KC_F1, KC_F2, KC_F3, KC_F4,   KC_F5,                                KC_F6,   KC_F7,   KC_F8, KC_F9, KC_F10, KC_F11,
-    //   KC_PSLS, KC_P7, KC_P8, KC_P9, KC_NLCK, _______, _______,                   _______, _______, KC_PSLS, KC_P7, KC_P8, KC_P9, KC_F12,
-    //   KC_CAPS, KC_P4, KC_P5, KC_P6, KC_NLCK, _______, _______,                   _______, _______, _______, KC_P4, KC_P5, KC_P6, KC_NLCK,
-    //   _______, KC_P1, KC_P2, KC_P3, _______, _______, _______, _______,  _______, _______, _______, _______, KC_P1, KC_P2, KC_P3, _______,
-    //   _______, KC_P0, KC_PDOT, KC_PENT, _______,     _______,  _______,   _______,    _______,   _______, KC_P0, KC_PDOT, KC_PENT, _______
-    //   ),
-
-	// [_RAISE] = LAYOUT(
-    //   _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                           KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
-    //   KC_PSLS, KC_P7, KC_P8, KC_P9, KC_NLCK, _______, _______,                    _______, _______, KC_PSLS, KC_P7, KC_P8, KC_P9, KC_F12,
-    //   KC_CAPS, KC_P4, KC_P5, KC_P6, KC_NLCK, _______, _______,                    _______, _______, _______, KC_P4, KC_P5, KC_P6, KC_NLCK,
-    //   _______, KC_P1, KC_P2, KC_P3, _______, _______, _______, _______,  _______, _______, _______, _______, KC_P1, KC_P2, KC_P3, _______,
-    //   _______, KC_P0, KC_PDOT, KC_PENT, _______,    _______,   _______,  _______,    _______,    _______, KC_P0, KC_PDOT, KC_PENT, _______
-    //   ),
-
-	// [_ADJUST] = LAYOUT(
-    //   _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
-    //   _______, _______, _______, _______, _______, _______, _______,                   _______, _______, EEP_RST, _______, _______, _______, KC_F12,
-    //   _______, _______, _______, _______, _______, _______, _______,                   _______, _______, RGB_TOG, _______, _______, _______, _______,
-    //   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_MOD, RGB_SPI, RGB_HUI, RGB_SAI, RGB_VAI,
-    //   _______, _______, _______, _______, _______,      _______,     _______, _______,     _______,      RGB_RMOD, RGB_SPD, RGB_HUD, RGB_SAD, RGB_VAD
-    //   )
+	[_RAISE] = LAYOUT(
+      _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                           KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
+      KC_PSLS, KC_P7, KC_P8, KC_P9, KC_NLCK, _______, _______,                    _______, _______, KC_PSLS, KC_P7, KC_P8, KC_P9, KC_F12,
+      KC_CAPS, KC_P4, KC_P5, KC_P6, KC_NLCK, _______, _______,                    _______, _______, _______, KC_P4, KC_P5, KC_P6, KC_NLCK,
+      _______, KC_P1, KC_P2, KC_P3, _______, _______, _______, _______,  _______, _______, _______, _______, KC_P1, KC_P2, KC_P3, _______,
+      _______, KC_P0, KC_PDOT, KC_PENT, _______,    _______,   _______,  _______,    _______,    _______, KC_P0, KC_PDOT, KC_PENT, _______
+      ),
 
 };
 #ifdef OLED_ENABLE
@@ -141,9 +119,15 @@ static void render_logo(void) {
 }
 
 static void print_status_narrow(void) {
-    // Print current layer
+    // Print current mode
     oled_write_P(PSTR("\n\n"), false);
-    oled_write_ln_P(PSTR("LAYER"), false);
+    oled_write_ln_P(PSTR("MODE"), false);
+    oled_write_ln_P(PSTR(""), false);
+    if (keymap_config.swap_lctl_lgui) {
+        oled_write_ln_P(PSTR("MAC"), false);
+    } else {
+        oled_write_ln_P(PSTR("WIN"), false);
+    }
 
     switch (get_highest_layer(default_layer_state)) {
         case _BASE:
@@ -152,16 +136,30 @@ static void print_status_narrow(void) {
         case _MAC:
             oled_write_ln_P(PSTR("Mac"), false);
             break;
-        case _SHIFT:
-            oled_write_ln_P(PSTR("Shift"), false);
-            break;
-        case _NUMPAD:
-            oled_write_ln_P(PSTR("Num"), false);
-            break;
         default:
             oled_write_P(PSTR("Undef"), false);
     }
     oled_write_P(PSTR("\n\n"), false);
+    // Print current layer
+    oled_write_ln_P(PSTR("LAYER"), false);
+    switch (get_highest_layer(layer_state)) {
+        case _MAC:
+        case _BASE:
+            oled_write_P(PSTR("Base\n"), false);
+            break;
+        case _RAISE:
+            oled_write_P(PSTR("Raise"), false);
+            break;
+        case _LOWER:
+            oled_write_P(PSTR("Lower"), false);
+            break;
+        case _SHIFT:
+            oled_write_P(PSTR("Shift"), false);
+            break;
+        default:
+            oled_write_ln_P(PSTR("Undef"), false);
+    }
+    // oled_write_P(PSTR("\n\n"), false);
     // led_t led_usb_state = host_keyboard_led_state();
     // oled_write_ln_P(PSTR("CPSLK"), led_usb_state.caps_lock);
 }
@@ -188,7 +186,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case KC_BASE:
             if (record->event.pressed) {
-                set_single_persistent_default_layer(_BASE);
+                set_single_persistent_default_layer(_BASE
+                );
             }
             return false;
         case KC_MAC:
@@ -196,13 +195,38 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 set_single_persistent_default_layer(_MAC);
             }
             return false;
+        case KC_LOWER:
+            if (record->event.pressed) {
+                layer_on(_LOWER);
+            } else {
+                layer_off(_LOWER);
+            }
+            return false;
+        case KC_RAISE:
+            if (record->event.pressed) {
+                layer_on(_RAISE);
+            } else {
+                layer_off(_RAISE);
+            }
+            return false;
         case KC_CSFT:
             if (record->event.pressed) {
                 layer_on(_SHIFT);
+                register_code(KC_LSFT);
             } else {
                 layer_off(_SHIFT);
+                unregister_code(KC_LSFT);
             }
             return false;
+        case KC_DV_PERC ... KC_DV_UNDS:
+            // Dvorak shifted keycodes will be sent while the _SHIFT
+            // layer is active, via KC_CSFT. This means we need to 
+            // un-register KC_LSFT while these keys are pressed
+            if (record->event.pressed) {
+
+            }
+
+            break;
         case KC_PRVWD:
             if (record->event.pressed) {
                 if (keymap_config.swap_lctl_lgui) {
