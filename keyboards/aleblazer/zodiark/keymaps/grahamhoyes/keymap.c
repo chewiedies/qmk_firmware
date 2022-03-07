@@ -27,7 +27,7 @@ enum layers {
     _MAC,
     _LOWER,
     _RAISE,
-    _SHIFT,
+    _NUMPAD,
 };
 
 enum custom_keycodes {
@@ -41,6 +41,13 @@ enum custom_keycodes {
     KC_LEND,
     KC_DLINE,
 };
+
+typedef enum {
+    // Super when tapped, switch to mac mode when double tapped
+    TD_SUPER_MAC,
+    // Spotlight search when tapped, switch to base mode when double tapped
+    TD_SPOTLIGHT_BASE,
+} td_codes_t;
 
 // Key overrides for programmer dvorak shifted numbers
 const key_override_t pd_perc_override = ko_make_basic(MOD_MASK_SHIFT, KC_AMPR, KC_PERC);
@@ -84,29 +91,37 @@ const key_override_t **key_overrides = (const key_override_t *[]) {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-	[_BASE] = LAYOUT(
-      KC_AMPR , KC_LBRACKET , KC_LCBR   , KC_RCBR    , KC_LPRN     , KC_EQUAL ,                                         KC_ASTR , KC_RPRN , KC_PLUS , KC_RBRACKET , KC_EXLM  , KC_GRAVE ,
-      KC_TAB  , KC_SCOLON   , KC_COMMA  , KC_DOT     , KC_P        , KC_Y     , KC_AT   ,                     KC_BSLS , KC_F    , KC_G    , KC_C    , KC_R        , KC_L     , KC_SLASH ,
-      KC_ESC  , KC_A        , KC_O      , KC_E       , KC_U        , KC_I     , KC_HOME ,                     KC_END  , KC_D    , KC_H    , KC_T    , KC_N        , KC_S     , KC_MINUS ,
-      KC_LSFT , KC_QUOTE    , KC_Q      , KC_J       , KC_K        , KC_X     , KC_LALT , KC_MUTE , RGB_TOG , KC_LGUI , KC_B    , KC_M    , KC_W    , KC_V        , KC_Z     , KC_RSFT  ,
-      KC_LCTL , KC_MEH      , KC_PC_CUT , KC_PC_COPY , KC_PC_PASTE ,            KC_BSPC , KC_DEL  , KC_ENT  , KC_SPC  ,           KC_LEFT , KC_DOWN , KC_UP       , KC_RIGHT , KC_RCTRL
+    [_BASE] = LAYOUT(
+        KC_AMPR , KC_LBRACKET , KC_LCBR   , KC_RCBR    , KC_LPRN           , KC_EQUAL ,                                                  KC_ASTR , KC_RPRN , KC_PLUS , KC_RBRACKET , KC_EXLM  , KC_GRAVE ,
+        KC_TAB  , KC_SCOLON   , KC_COMMA  , KC_DOT     , KC_P              , KC_Y     , KC_AT   ,                     KC_BSLS          , KC_F    , KC_G    , KC_C    , KC_R        , KC_L     , KC_SLASH ,
+        KC_ESC  , KC_A        , KC_O      , KC_E       , LT(_NUMPAD, KC_U) , KC_I     , KC_HOME ,                     KC_END           , KC_D    , KC_H    , KC_T    , KC_N        , KC_S     , KC_MINUS ,
+        KC_LSFT , KC_QUOTE    , KC_Q      , KC_J       , KC_K              , KC_X     , KC_LALT , KC_MUTE , RGB_TOG , TD(TD_SUPER_MAC) , KC_B    , KC_M    , KC_W    , KC_V        , KC_Z     , KC_RSFT  ,
+        KC_LCTL , KC_MEH      , KC_PC_CUT , KC_PC_COPY , KC_PC_PASTE       ,            KC_BSPC , KC_DEL  , KC_ENT  , KC_SPACE         ,           KC_LEFT , KC_DOWN , KC_UP   , KC_RIGHT , KC_RCTRL
     ),
 
-	[_LOWER] = LAYOUT(
-      _______, KC_F1, KC_F2, KC_F3, KC_F4,   KC_F5,                                KC_F6,   KC_F7,   KC_F8, KC_F9, KC_F10, KC_F11,
-      KC_PSLS, KC_P7, KC_P8, KC_P9, KC_NLCK, _______, _______,                   _______, _______, KC_PSLS, KC_P7, KC_P8, KC_P9, KC_F12,
-      KC_CAPS, KC_P4, KC_P5, KC_P6, KC_NLCK, _______, _______,                   _______, _______, _______, KC_P4, KC_P5, KC_P6, KC_NLCK,
-      _______, KC_P1, KC_P2, KC_P3, _______, _______, _______, _______,  _______, _______, _______, _______, KC_P1, KC_P2, KC_P3, _______,
-      _______, KC_P0, KC_PDOT, KC_PENT, _______,     _______,  _______,   _______,    _______,   _______, KC_P0, KC_PDOT, KC_PENT, _______
-      ),
+    [_MAC] = LAYOUT(
+        _______ , _______  , _______    , _______     , _______      , _______ ,                                                       _______ , _______ , _______ , _______ , _______ , _______ ,
+        _______ , _______  , _______    , _______     , _______      , _______ , _______ ,                     _______               , _______ , _______ , _______ , _______ , _______ , _______ ,
+        _______ , _______  , _______    , _______     , _______      , _______ , _______ ,                     _______               , _______ , _______ , _______ , _______ , _______ , _______ ,
+        _______ , _______  , _______    , _______     , _______      , _______ , _______ , _______ , _______ , TD(TD_SPOTLIGHT_BASE) , _______ , _______ , _______ , _______ , _______ , _______ ,
+        KC_LGUI , KC_LCTRL , KC_MAC_CUT , KC_MAC_COPY , KC_MAC_PASTE ,           _______ , _______ , _______ , _______ ,                         _______ , _______ , _______ , _______ , KC_RGUI
+    ),
 
-	[_RAISE] = LAYOUT(
-      _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                           KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
-      KC_PSLS, KC_P7, KC_P8, KC_P9, KC_NLCK, _______, _______,                    _______, _______, KC_PSLS, KC_P7, KC_P8, KC_P9, KC_F12,
-      KC_CAPS, KC_P4, KC_P5, KC_P6, KC_NLCK, _______, _______,                    _______, _______, _______, KC_P4, KC_P5, KC_P6, KC_NLCK,
-      _______, KC_P1, KC_P2, KC_P3, _______, _______, _______, _______,  _______, _______, _______, _______, KC_P1, KC_P2, KC_P3, _______,
-      _______, KC_P0, KC_PDOT, KC_PENT, _______,    _______,   _______,  _______,    _______,    _______, KC_P0, KC_PDOT, KC_PENT, _______
-      ),
+    [_NUMPAD] = LAYOUT(
+        _______ , _______ , _______ , _______ , _______ , _______ ,                                         _______ , _______ , KC_KP_PLUS , KC_KP_ASTERISK , KC_KP_MINUS , _______     ,
+        _______ , _______ , _______ , _______ , _______ , _______ , _______ ,                     _______ , _______ , KC_7    , KC_8       , KC_9           , KC_KP_PLUS  , _______     ,
+        _______ , _______ , _______ , _______ , _______ , _______ , _______ ,                     _______ , _______ , KC_4    , KC_5       , KC_6           , KC_KP_PLUS  , _______     ,
+        _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , KC_1    , KC_2       , KC_3           , KC_KP_ENTER , KC_KP_ENTER ,
+        _______ , _______ , _______ , _______ , _______ ,           _______ , _______ , _______ , _______ ,           KC_0    , KC_0       , KC_DOT         , KC_KP_ENTER , _______
+    ),
+
+    [_RAISE] = LAYOUT(
+        _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                           KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
+        KC_PSLS, KC_P7, KC_P8, KC_P9, KC_NLCK, _______, _______,                    _______, _______, KC_PSLS, KC_P7, KC_P8, KC_P9, KC_F12,
+        KC_CAPS, KC_P4, KC_P5, KC_P6, KC_NLCK, _______, _______,                    _______, _______, _______, KC_P4, KC_P5, KC_P6, KC_NLCK,
+        _______, KC_P1, KC_P2, KC_P3, _______, _______, _______, _______,  _______, _______, _______, _______, KC_P1, KC_P2, KC_P3, _______,
+        _______, KC_P0, KC_PDOT, KC_PENT, _______,    _______,   _______,  _______,    _______,    _______, KC_P0, KC_PDOT, KC_PENT, _______
+    ),
 
 };
 #ifdef OLED_ENABLE
@@ -156,6 +171,9 @@ static void print_status_narrow(void) {
         case _LOWER:
             oled_write_P(PSTR("Lower"), false);
             break;
+        case _NUMPAD:
+            oled_write_P(PSTR("Numpad"), false);
+            break;
         default:
             oled_write_ln_P(PSTR("Undef"), false);
     }
@@ -186,8 +204,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case KC_BASE:
             if (record->event.pressed) {
-                set_single_persistent_default_layer(_BASE
-                );
+                set_single_persistent_default_layer(_BASE);
             }
             return false;
         case KC_MAC:
@@ -289,3 +306,102 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 }
 
 #endif
+
+typedef enum {
+    TD_NONE,
+    TD_UNKNOWN,
+    TD_SINGLE_TAP,
+    TD_SINGLE_HOLD,
+    TD_DOUBLE_TAP,
+    TD_DOUBLE_HOLD,
+    TD_DOUBLE_SINGLE_TAP,
+    TD_MORE_TAPS,
+} td_state_t;
+
+typedef struct {
+    bool is_pressed_action;
+    td_state_t state;
+} td_tap_t;
+
+td_state_t dance_step(qk_tap_dance_state_t *state) {
+    if (state->count == 1) {
+        if (state ->interrupted || !state->pressed) return TD_SINGLE_TAP;
+        else return TD_SINGLE_HOLD;
+    } else if (state->count == 2) {
+        if (state->interrupted) return TD_DOUBLE_SINGLE_TAP;
+        else if (state->pressed) return TD_DOUBLE_HOLD;
+        else return TD_DOUBLE_TAP;
+    }
+    return TD_MORE_TAPS;
+}
+
+// Should be the same size as td_codes_t
+td_tap_t dance_states[3];
+
+// Super Mac: Single tap or hold for super, double tap to activate mac mode
+void dance_super_mac_finished(qk_tap_dance_state_t *state, void *user_data) {
+    dance_states[TD_SUPER_MAC].state = dance_step(state);
+
+    switch (dance_states[TD_SUPER_MAC].state) {
+        case TD_SINGLE_TAP:
+        case TD_SINGLE_HOLD:
+            register_code16(KC_LGUI);
+            break;
+        case TD_DOUBLE_SINGLE_TAP:
+            tap_code16(KC_LGUI);
+            register_code16(KC_LGUI);
+            break;
+        case TD_DOUBLE_TAP:
+            set_single_persistent_default_layer(_MAC);
+            break;
+        default:
+            break;
+    }
+}
+
+void dance_super_mac_reset(qk_tap_dance_state_t *state, void *user_data) {
+    switch (dance_states[TD_SUPER_MAC].state) {
+        case TD_SINGLE_TAP:
+        case TD_SINGLE_HOLD:
+        case TD_DOUBLE_SINGLE_TAP:
+            unregister_code16(KC_LGUI);
+            break;
+        default:
+            break;
+    }
+
+    dance_states[TD_SUPER_MAC].state = TD_NONE;
+}
+
+// Spotlight Base: Single tap for spotlight search, double tap to activate base mode
+void dance_spotlight_base_finished(qk_tap_dance_state_t *state, void *user_data) {
+    dance_states[TD_SPOTLIGHT_BASE].state = dance_step(state);
+
+    switch(dance_states[TD_SPOTLIGHT_BASE].state) {
+        case TD_SINGLE_TAP:
+            register_code16(LGUI(KC_SPACE));
+            break;
+        case TD_DOUBLE_TAP:
+            set_single_persistent_default_layer(_BASE);
+            break;
+        default:
+            break;
+    }
+}
+
+void dance_spotlight_base_reset(qk_tap_dance_state_t *state, void *user_data) {
+    switch(dance_states[TD_SPOTLIGHT_BASE].state) {
+        case TD_SINGLE_TAP:
+            unregister_code16(LGUI(KC_SPACE));
+            break;
+        default:
+            break;
+    }
+
+    dance_states[TD_SPOTLIGHT_BASE].state = TD_NONE;
+}
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+    [TD_SUPER_MAC] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_super_mac_finished, dance_super_mac_reset),
+    [TD_SPOTLIGHT_BASE] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_spotlight_base_finished, dance_spotlight_base_reset),
+};
