@@ -72,7 +72,29 @@ enum custom_keycodes {
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    /* Base */
+
+    /* Base
+                                                                      ╭────────╮                                                                         ╭────────╮
+                                                             ╭────────╯   #    ╰────────╮                                                       ╭────────╯    *   ╰────────╮
+    ╭────────╮────────╭────────╮────────╮  ╭────────╮────────╯   @    │   3    │   $    ╰────────╮                                     ╭────────╯    &   │    8   │    (   ╰────────╭────────╮   ╭────────╮────────╭────────╮
+    │        │        │        │        │  │        │   !    │   2    ╰────────╯   4    │   %    │                                     │    ^   │    7   ╰────────╯    9   │    )   │   __   │   │    +   │        │        │
+    │   /    │   7    │   8    │   9    │  │  Esc   │   1    ╰────────╯        ╰────────╯   5    │                                     │    6   ╰────────╯        ╰────────╯    0   │    -   │   │    =   │  Home  │   End  │
+    ╰────────╰────────╰────────╰────────╯  ╰────────╰────────╯        │   E    │        ╰────────╯                                     ╰────────╯        │    I   │        ╰────────╰────────╯   ╰────────╰────────╰────────╯
+    │        │        │        │        │  │        │        │   W    ╰────────╯   R    │        │                                     │        │    U   ╰────────╯    O   │        │        │   │    {   │    }   │    |   │
+    │   *    │   4    │   5    │   6    │  │  Tab   │   Q    ╰────────╯        ╰────────╯   T    │                                     │    Y   ╰────────╯        ╰────────╯    P   │ Bkspc  │   │    [   │    ]   │    \   │
+    ╰────────╰────────╰────────╰────────╯  ╰────────╰────────╯        │   D    │        ╰────────╯                                     ╰────────╯        │    K   │        ╰────────╰────────╯   ╰────────╰────────╰────────╯
+    │        │        │        │        │  │        │        │   S    ╰────────╯   F    │        │                                     │        │    J   ╰────────╯    L   │    :   │    "   │            ╭────────╮
+    │   -    │   1    │   2    │   3    │  │  Ctrl  │   A    ╰────────╯        ╰────────╯   G    │                                     │    H   ╰────────╯    <   ╰────────╯    ;   │    '   │            │        │
+    ╰────────╰────────╰────────╰────────╯  ╰────────╰────────╯        │   C    │        ╰────────╯                                     ╰────────╯        │    ,   │    >   ╰────────╰────────╯            │   Up   │
+    │        │        │        │        │  │        │        │   X    ╰────────╯   V    │        │                                     │        │    M   ╰────────╯    .   │    ?   │        │   ╭────────╰────────╰────────╮
+    │   +    │   0    │   .    │   =    │  │  Shift │   Z    ╰────────╯        ╰────────╯   B    │╭────────╮                 ╭────────╮│    N   ╰────────╯        ╰────────╯    /   │(rShift)│   │        │        │        │
+    ╰────────╰────────╰────────╰────────╯  ╰────────╰────────╯                          ╰────────╯│        │                 │        │╰────────╯                          ╰────────╰────────╯   │  Left  │  Down  │ Right  │
+                                                          ╭────────╮╭────────╮╭────────╮╭────────╮│        │                 │        │╭────────╮╭────────╮╭────────╮╭────────╮                  ╰────────╰────────╰────────╯
+                                                          │        ││        ││        ││        ││        │                 │        ││        ││   __   ││        ││        │
+                                                          │ PSTBRD ││  CMD   ││  Space ││  Raise ││  Enter │                 │ Space  ││ Lower  ││   -    ││   Alt  ││  Mute  │
+                                                          ╰─encodr─╯╰────────╯╰────────╯╰────────╯╰────────╯                 ╰────────╯╰────────╯╰────────╯╰────────╯╰─encodr─╯
+
+*/
     [_QWERTY] = LAYOUT(
         KC_PSLS, KC_7,    KC_8,    KC_9,      KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,   KC_EQL,  KC_HOME, KC_END,  XXXXXXX,
         KC_PAST, KC_4,    KC_5,    KC_6,      KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,   KC_LBRC, KC_RBRC, KC_BSLS, XXXXXXX,
@@ -116,7 +138,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL, KC_0,    XXXXXXX, KC_B,      KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,   KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX,
                                                              DF(_QWERTY),KC_SPC,  XXXXXXX, KC_RAISE, KC_ENT,     KC_SPC, KC_LOWER,KC_MINS, KC_LALT, KC_MUTE
     ),
-};
+;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -295,7 +317,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 register_code(KC_LGUI);
                 register_code(KC_LCTL);
                 register_code(KC_LEFT);
-            } else { 
+            } else {
                 unregister_code(KC_LGUI);
                 unregister_code(KC_LCTL);
                 unregister_code(KC_LEFT);
@@ -345,7 +367,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 register_code(KC_LEFT);
             } else {
                 unregister_code(KC_LALT);
-                unregister_code(KC_LCTL); 
+                unregister_code(KC_LCTL);
                 unregister_code(KC_LEFT);
             }
             break;
@@ -405,7 +427,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 register_code(KC_LGUI);
                 register_code(KC_LALT);
                 register_code(KC_C);
-            } else { 
+            } else {
                 unregister_code(KC_LGUI);
                 unregister_code(KC_LALT);
                 unregister_code(KC_C);
@@ -439,7 +461,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_RGHT);
             }
             break;
-            
+
         case W_TLEFT:
             if (record->event.pressed) {
                 register_code(KC_LCTL);
@@ -468,7 +490,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 register_code(KC_LCTL);
                 register_code(KC_LGUI);
-                register_code(KC_2); 
+                register_code(KC_2);
             } else {
                 unregister_code(KC_LCTL);
                 unregister_code(KC_LGUI);
@@ -525,7 +547,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         //     }
         //     break;
         }
-        
+
     } else if (index == 1) {
         switch(biton32(layer_state)) {
         case _QWERTY:
@@ -551,9 +573,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 unregister_code16(KC_LALT);
             }
             break;
-        
+
         // case _ADJUST:
-        //     if (clockwise) { 
+        //     if (clockwise) {
         //         rgblight_increase_hue();
         //     } else {
         //         rgblight_decrease_hue();
@@ -570,7 +592,7 @@ void matrix_scan_user(void) {
     // static bool has_ran_yet = false;
     // if (!has_ran_yet) {
     //     has_ran_yet = true;
-    //     rgblight_mode(RGBLIGHT_MODE_RAINBOW_SWIRL + 3); 
+    //     rgblight_mode(RGBLIGHT_MODE_RAINBOW_SWIRL + 3);
     //     // rgblight_mode(RGBLIGHT_MODE_BREATHING + 1);
     //     // rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
     //     // rgblight_sethsv(HSV_YELLOW);
