@@ -26,6 +26,13 @@
  * represents the switch matrix.
  */
 
+/* #define MATRIX_ROW_PINS \
+     { B6, F4, B5, B4, B2, B3, B7, D5 }
+   #define MATRIX_COL_PINS \
+     { D2, D4, C6, D7, E6, F5, F6, F7, B1 }
+   #define UNUSED_PINS
+*/
+
 #define ___ KC_NO
 
 #define LAYOUT_rockon( \

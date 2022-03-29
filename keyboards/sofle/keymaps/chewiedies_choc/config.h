@@ -35,8 +35,10 @@
 
 #ifdef TAPPING_TERM
     #undef TAPPING_TERM
-    #define TAPPING_TERM 200
+    #define TAPPING_TERM 250
 #endif
+
+#define PERMISSIVE_HOLD
 
 // #define ENCODER_DIRECTION_FLIP
 
@@ -51,13 +53,15 @@
 // #undef ENCODERS_PAD_B
 // #undef ENCODERS_PAD_A_RIGHT
 // #undef ENCODERS_PAD_B_RIGHT
-#undef ENCODER_RESOLUTION
 
 // #define ENCODERS_PAD_A { F4 }
 // #define ENCODERS_PAD_B { F5 }
 // #define ENCODERS_PAD_A_RIGHT { F5 }
 // #define ENCODERS_PAD_B_RIGHT { F4 }
-#define ENCODER_RESOLUTION 4
+#ifdef ENCODER_RESOLUTION
+    #undef ENCODER_RESOLUTION
+    #define ENCODER_RESOLUTIONS { 2, 2 }
+#endif
 
 #ifdef OLED_TIMEOUT
     #undef OLED_TIMEOUT
@@ -75,7 +79,7 @@
     //#define RGBLIGHT_ANIMATIONS
     #define RGBLIGHT_STATIC_LIGHT
 	//#define RGBLIGHT_EFFECT_BREATHING
-	#define RGBLIGHT_EFFECT_RAINBOW_MOOD
+	// #define RGBLIGHT_EFFECT_RAINBOW_MOOD
 	//#define RGBLIGHT_EFFECT_RAINBOW_SWIRL
 	//#define RGBLIGHT_EFFECT_SNAKE
 	//#define RGBLIGHT_EFFECT_KNIGHT
@@ -89,7 +93,7 @@
 	//#define RGBLED_SPLIT
 	#define RGBLED_SPLIT { 29, 29 }
 	//#define RGBLED_NUM 30
-    #define RGBLIGHT_LIMIT_VAL 180
+    #define RGBLIGHT_LIMIT_VAL 150
     #define RGBLIGHT_HUE_STEP 2
     #define RGBLIGHT_SAT_STEP 17
     #define RGBLIGHT_VAL_STEP 8

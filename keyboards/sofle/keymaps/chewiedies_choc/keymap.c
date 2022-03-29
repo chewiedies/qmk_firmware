@@ -74,6 +74,8 @@ enum custom_keycodes {
 // #define NUMTAB LT(_NUMPAD,KC_TAB)
 #define NUMENT LT(_NUMPAD,KC_ENT)
 #define RSFTENT RSFT_T(KC_ENT)
+#define LSFTSPC LSFT_T(KC_SPC)
+#define NUMMINS LT(_NUMPAD, KC_MINS)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
@@ -101,11 +103,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                                               ╰────────╯   ╰────────╯
  */
   [_QWERTY] = LAYOUT(
-    KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                           KC_6,   KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
-    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                           KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-    KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                           KC_H,   KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    PSTBRD,       KC_MUTE, KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFTENT,
-                      KC_LALT, KC_LGUI, KC_RAISE,KC_SPC,  NUMENT,       KC_MINS, KC_SPC, KC_LOWER,KC_LBRC, KC_RBRC
+    KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                            KC_6,   KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
+    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                                            KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
+    KC_LGUI, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                                            KC_H,   KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+    KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    PSTBRD,                        KC_MUTE, KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFTENT,
+                      KC_LALT, KC_LGUI, KC_RAISE,LSFTSPC, NUMENT,                        NUMMINS, KC_SPC, KC_LOWER,KC_LBRC, KC_RBRC
   ),
 
 /*
@@ -135,11 +137,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT(
 
-    XXXXXXX, KC_IMP,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    XXXXXXX, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                        KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
-    _______, XXXXXXX, KC_CLAW, KC_LPRN, KC_RPRN, XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______,
-    _______, XXXXXXX, XXXXXXX, KC_LCBR, KC_RCBR, KC_BSLS, SCRNCAP,      _______, XXXXXXX, XXXXXXX, _______, _______, _______, _______,
-                      _______, _______, _______, KC_EQL,  KC_PLUS,      KC_MINS, _______, _______, _______, _______
+    XXXXXXX, KC_IMP,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                                         KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
+    KC_CAPS, XXXXXXX, KC_CLAW, KC_LPRN, KC_RPRN, KC_LBRC,                                         KC_RBRC, KC_PLUS, KC_EQL,  KC_BSLS, KC_PIPE, _______,
+    XXXXXXX, XXXXXXX, XXXXXXX, KC_LCBR, KC_RCBR, KC_BSLS, SCRNCAP,                       _______, KC_GRV,  KC_TILD, _______, _______, _______, _______,
+                      _______, _______, _______, _______, _______,                       KC_MINS, _______, _______, _______, _______
   ),
 
 /*
@@ -168,11 +170,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
   [_RAISE] = LAYOUT(
-    KC_UNDO, KC_REDO, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    KC_SFTB, XXXXXXX, XXXXXXX, KC_MS_U, XXXXXXX, XXXXXXX,                        KC_TOP,  KC_PRVWD,KC_UP,   KC_NXTWD,XXXXXXX, KC_DEL,
-    _______, XXXXXXX, KC_MS_L, KC_MS_D, KC_MS_R, XXXXXXX,                        XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX,
-    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC, _______,      _______, KC_BOT,  KC_LSTRT,XXXXXXX, KC_LEND, XXXXXXX, _______,
-                      _______, _______, _______, _______, _______,      _______, _______, _______, _______, _______
+    KC_UNDO, KC_REDO, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    KC_SFTB, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                         KC_TOP,  KC_PRVWD,KC_UP,   KC_NXTWD,XXXXXXX, KC_DEL,
+    KC_CAPS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                         XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC, _______,                       _______, KC_BOT,  KC_LSTRT,XXXXXXX, KC_LEND, XXXXXXX, _______,
+                      _______, _______, _______, _______, _______,                       _______, LSFTSPC, _______, _______, _______
   ),
 
 /*
@@ -201,11 +203,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
   [_ADJUST] = LAYOUT(
-    RGB_RMOD,RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    RGB_VAD, RGB_VAI, W_SMLR,  W_TTHRD, W_LRGR,  XXXXXXX,                        XXXXXXX, W_TLEFT, W_THALF, W_TRGHT, XXXXXXX, XXXXXXX,
-    RGB_SAD, RGB_SAI, W_LTHRD, W_MAX,   W_RTHRD, XXXXXXX,                        XXXXXXX, W_LHALF, W_CENT,  W_RHALF, XXXXXXX, XXXXXXX,
-    RGB_HUD, RGB_HUI, XXXXXXX, W_BTHRD, XXXXXXX, XXXXXXX, RGB_TOG,      RGB_TOG, XXXXXXX, W_BLEFT, W_BHALF, W_BRGHT, XXXXXXX, XXXXXXX,
-                      _______, _______, XXXXXXX, _______, _______,      _______, _______, XXXXXXX, _______, _______
+    RGB_RMOD,RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    RGB_VAD, RGB_VAI, W_SMLR,  W_TTHRD, W_LRGR,  XXXXXXX,                                         XXXXXXX, W_TLEFT, W_THALF, W_TRGHT, XXXXXXX, XXXXXXX,
+    RGB_SAD, RGB_SAI, W_LTHRD, W_MAX,   W_RTHRD, XXXXXXX,                                         XXXXXXX, W_LHALF, W_CENT,  W_RHALF, XXXXXXX, XXXXXXX,
+    RGB_HUD, RGB_HUI, XXXXXXX, W_BTHRD, XXXXXXX, XXXXXXX, RGB_TOG,                       RGB_TOG, XXXXXXX, W_BLEFT, W_BHALF, W_BRGHT, XXXXXXX, XXXXXXX,
+                      _______, _______, XXXXXXX, _______, _______,                       _______, _______, XXXXXXX, _______, _______
   ),
 
 /*
@@ -224,21 +226,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * │        │   6    │        │        │        ╰────────╯                                     ╰────────╯        │    2   │        │   =    │        │
  * ╰────────╯────────╯        ╰────────╯   .    │        │  ╭────────╮             ╭────────╮  │        │    1   ╰────────╯    3   ╰────────╰────────╯
  * │        │        ╰────────╯        ╰────────╯   ,    │  │        │             │  CALC  │  │        ╰────────╯        ╰────────╯        │        │
- * │        │        │          ╭────────╮      ╰────────╯  │        │             │  APP   │  ╰────────╯      ╭────────╮          │ Enter  │        │
- * ╰────────╯────────╯╭────────╮│        ╰────────╮         ╰─encodr─╯             ╰─encodr─╯         ╭────────╯        │╭────────╮╰────────╰────────╯
- *                    │        ││        │        ╰────────╮                                 ╭────────╯        │    .   ││        │
- *                    │        │╰────────╯        │        ╰────────╮               ╭────────╯        │    0   ╰────────╯│    ,   │
- *                    ╰────────╯         ╰────────╯        │        │               │        │        ╰────────╯         ╰────────╯
- *                                                ╰────────╯        │               │        ╰────────╯
- *                                                         ╰────────╯               ╰────────╯
+ * │        │        │                ╭────────╮╰────────╯  │        │             │  APP   │  ╰────────╯╭────────╮                │ Enter  │        │
+ * ╰────────╯────────╯      ╭────────╮│        ╰────────╮   ╰─encodr─╯             ╰─encodr─╯   ╭────────╯        │╭────────╮      ╰────────╰────────╯
+ *                          │        ││        │        ╰────────╮                     ╭────────╯        │    .   ││        │
+ *                          │        │╰────────╯        │        ╰────────╮   ╭────────╯        │    0   ╰────────╯│    ,   │
+ *                          ╰────────╯         ╰────────╯        │        │   │        │        ╰────────╯         ╰────────╯
+ *                                                      ╰────────╯        │   │        ╰────────╯
+ *                                                               ╰────────╯   ╰────────╯
  */
 
   [_NUMPAD] = LAYOUT(
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, XXXXXXX,
-    _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                           XXXXXXX, KC_P7,   KC_P8,   KC_P9,   KC_PPLS, KC_BSPC,
-    XXXXXXX, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,                           XXXXXXX, KC_P4,   KC_P5,   KC_P6,   KC_PEQL, XXXXXXX,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_DOT,  KC_COMM, _______,      CALCAPP, XXXXXXX, KC_P1,   KC_P2,   KC_P3,   KC_PENT, XXXXXXX,
-                      _______, _______, _______, _______, _______,      _______, _______, KC_P0,   KC_PDOT, KC_COMM
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                         XXXXXXX, KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, XXXXXXX,
+    _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                            KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
+    XXXXXXX, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,                                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_DOT,  KC_COMM, _______,                       CALCAPP, XXXXXXX, XXXXXXX, _______, _______, _______, _______,
+                      _______, _______, _______, _______, _______,                       _______, _______, _______, _______, _______
   ),
 
 /*
@@ -285,7 +287,7 @@ static void render_logo(void) {
 }
 
 /* 32 * 14 os logos */
-static const char PROGMEM windows_logo[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xbc, 0xbc, 0xbe, 0xbe, 0x00, 0xbe, 0xbe, 0xbf, 0xbf, 0xbf, 0xbf, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0x07, 0x0f, 0x0f, 0x00, 0x0f, 0x0f, 0x1f, 0x1f, 0x1f, 0x1f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+// static const char PROGMEM windows_logo[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xbc, 0xbc, 0xbe, 0xbe, 0x00, 0xbe, 0xbe, 0xbf, 0xbf, 0xbf, 0xbf, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0x07, 0x0f, 0x0f, 0x00, 0x0f, 0x0f, 0x1f, 0x1f, 0x1f, 0x1f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
 static const char PROGMEM mac_logo[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xf0, 0xf8, 0xf8, 0xf8, 0xf0, 0xf6, 0xfb, 0xfb, 0x38, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x07, 0x0f, 0x1f, 0x1f, 0x0f, 0x0f, 0x1f, 0x1f, 0x0f, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
@@ -418,12 +420,12 @@ static void render_luna(int LUNA_X, int LUNA_Y) {
     }
 
     /* this fixes the screen on and off bug */
-    if (current_wpm > 0) {
-        oled_on();
-        anim_sleep = timer_read32();
-    } else if (timer_elapsed32(anim_sleep) > OLED_TIMEOUT) {
-        oled_off();
-    }
+    // if (current_wpm > 0) {
+    //     oled_on();
+    //     anim_sleep = timer_read32();
+    // } else if (timer_elapsed32(anim_sleep) > OLED_TIMEOUT) {
+    //     oled_off();
+    // }
 }
 
 /* KEYBOARD PET END */
@@ -448,11 +450,11 @@ static void print_logo_narrow(void) {
 static void print_status_narrow(void) {
     /* Print current mode */
     oled_set_cursor(0, 0);
-    if (keymap_config.swap_lctl_lgui) {
-        oled_write_raw_P(mac_logo, sizeof(mac_logo));
-    } else {
-        oled_write_raw_P(windows_logo, sizeof(windows_logo));
-    }
+    // if (keymap_config.swap_lctl_lgui) {
+         oled_write_raw_P(mac_logo, sizeof(mac_logo));
+    // } else {
+    //    oled_write_raw_P(windows_logo, sizeof(windows_logo));
+    // }
 
     oled_set_cursor(0, 3);
 
@@ -948,6 +950,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_LEFT);
             }
             break;
+
+        case KC_LGUI:
+        case KC_RGUI:
+            if (record->event.pressed) {
+                isSneaking = true;
+            } else {
+                isSneaking = false;
+            }
+            break;
+
+        case KC_SPC:
+            if (record->event.pressed) {
+                isJumping  = true;
+                showedJump = false;
+            } else {
+                isJumping = false;
+            }
+            break;
     }
     return true;
 }
@@ -959,14 +979,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         switch(biton32(layer_state)) {
         case _QWERTY:
-            if (clockwise) {
-                tap_code16(KC_WH_R);
-            } else {
-                tap_code16(KC_WH_L);
-            }
-            break;
-
-        case _LOWER:
             alt_tab_timer = timer_read();
             if (!is_alt_tab_active) {
                 is_alt_tab_active = true;
@@ -976,6 +988,19 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 tap_code16(KC_TAB);
             } else {
                 tap_code16(S(KC_TAB));
+            }
+            break;
+        case _LOWER:
+            if (clockwise) {
+                register_code16(KC_LGUI);
+                tap_code(KC_GRV);
+                unregister_code16(KC_LGUI);
+            } else {
+                register_code16(KC_LGUI);
+                register_code16(KC_LSFT);
+                tap_code(KC_GRV);
+                unregister_code16(KC_LGUI);
+                unregister_code16(KC_LSFT);
             }
             break;
 
@@ -1035,7 +1060,7 @@ void matrix_scan_user(void) {
         // rgblight_mode(RGBLIGHT_MODE_RAINBOW_SWIRL + 4);
         // rgblight_mode(RGBLIGHT_MODE_BREATHING + 1);
         rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
-        rgblight_sethsv(HSV_YELLOW);
+        rgblight_sethsv(HSV_PURPLE);
     }
     if (is_alt_tab_active) {
       if (timer_elapsed(alt_tab_timer) > 750) {
