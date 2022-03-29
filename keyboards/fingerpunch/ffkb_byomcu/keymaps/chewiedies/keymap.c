@@ -16,41 +16,64 @@ enum layer_names {
 
 // #define LOWER MO(_LOWER)
 // #define RAISE MO(_RAISE)
-#define ALTTAB MT(MOD_LALT, KC_TAB)
-#define ALTENT MT(MOD_LALT, KC_ENT)
-#define CMDESC MT(MOD_LGUI, KC_ESC)
-#define SFTSPC MT(MOD_LSFT, KC_SPC)
-#define SFTENT MT(MOD_LSFT, KC_ENT)
-#define NUMENT LT(_NUM, KC_ENT)
-#define NUMMIN LT(_NUM, KC_MINS)
+#define ALTTAB  MT(MOD_LALT, KC_TAB)
+#define ALTENT  MT(MOD_LALT, KC_ENT)
+#define CMDESC  MT(MOD_LGUI, KC_ESC)
+#define SFTSPC  MT(MOD_LSFT, KC_SPC)
+#define SFTENT  MT(MOD_LSFT, KC_ENT)
+#define NUMENT  LT(_NUM, KC_ENT)
+#define NUMMIN  LT(_NUM, KC_MINS)
+#define KCUNDO  LGUI(KC_Z)
+#define KCREDO  LGUI(LSFT(KC_Z))
+#define SFTTAB  LSFT(KC_TAB)
+#define PRVWRD  LALT(KC_LEFT)
+#define NXTWRD  LALT(KC_RGHT)
+#define LNBEG   LGUI(KC_LEFT)
+#define LNEND   LGUI(KC_RGHT)
+#define PGTOP   LGUI(KC_UP)
+#define PGBOT   LGUI(KC_DOWN)
+#define PSTBRD  LGUI(LALT(KC_V))
+#define SCRNCAP LCTL(LGUI(LSFT(KC_4)))
+#define THECLAW LCMD(LSFT(LALT(KC_S)))
+#define W_LHALF LCTL(LGUI(KC_LEFT))
+#define W_RHALF LCTL(LGUI(KC_RGHT))
+#define W_THALF LCTL(LGUI(KC_UP))
+#define W_BHALF LCTL(LGUI(KC_DOWN))
+#define W_LTHRD LCTL(LALT(KC_LEFT))
+#define W_RTHRD LCTL(LALT(KC_RGHT))
+#define W_TTHRD LCTL(LALT(KC_UP))
+#define W_BTHRD LCTL(LALT(KC_DOWN))
+#define W_MAX   LCTL(LALT(LGUI(KC_F)))
+#define W_CENT  LALT(LGUI(KC_C))
+#define W_SHOW  LCTL(KC_DOWN)
 
 enum custom_keycodes {
     QWERTY = SAFE_RANGE,
     LOWER,
     RAISE,
     ADJUST,
-    KC_PRVWD,
-    KC_NXTWD,
-    KC_LSTRT,
-    KC_LEND,
-    KC_TOPP,
-    KC_BOTP,
-    KC_REDO,
-    PSTBRD,
-    KC_SFTB,
-    SCRNCAP,
     KC_IMP,
-    KC_CLAW,
-    W_LHALF,
-    W_RHALF,
-    W_THALF,
-    W_BHALF,
-    W_LTHRD,
-    W_RTHRD,
-    W_TTHRD,
-    W_BTHRD,
-    W_MAX,
-    W_CENT,
+    // KC_PRVWD,
+    // KC_NXTWD,
+    // KC_LSTRT,
+    // KC_LEND,
+    // KC_TOPP,
+    // KC_BOTP,
+    // KC_REDO,
+    // PSTBRD,
+    // KC_SFTB,
+    // SCRNCAP,
+    // KC_CLAW,
+    // W_LHALF,
+    // W_RHALF,
+    // W_THALF,
+    // W_BHALF,
+    // W_LTHRD,
+    // W_RTHRD,
+    // W_TTHRD,
+    // W_BTHRD,
+    // W_MAX,
+    // W_CENT,
     // W_LSCRN,
     // W_RSCRN,
     // W_TLEFT,
@@ -65,99 +88,118 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-/* Qwerty
- *
- * ,-----------------------------------------.             ,-----------------------------------------.
- * | ALT/ |   Q  |   W  |   E  |   R  |   T  |             |   Y  |   U  |   I  |   O  |   P  |BckSpc|
- * | TAB  |      |      |      |      |      |             |      |      |      |      |      |      |
- * |------+------+------+------+------+------|   ,------.  |------+------+------+------+------+------|
- * | ESC/ |   A  |   S  |   D  |   F  |   G  |   |ALTTAB|  |   H  |   J  |   K  |   L  |   ;  |  '   |
- * | CMD  |      |      |      |      |      |             |      |      |      |      |      |      |
- * |------+------+------+------+------+------|   `------'  |------+------+------+------+------+------|
- * | CTL  |   Z  |   X  |   C  |   V  |   B  |             |   N  |   M  |   ,  |   .  |   /  | SFT  |
- * |      |      |      |      |      |      |             |      |      |      |      |      |      |
- * `-----------------------------------------'             `-----------------------------------------'
- *          ,------.        ,--------------------.    ,--------------------.        ,------.
- *          | MUTE |        |   \  | Enter| LOWER|    | RAISE| Space| Del  |        | DELW |
- *          `------'        `--------------------'    `--------------------.        `------'
+/* Base Layer: _QWERTY
+ *                            ╭────────╮                                                            ╭────────╮
+ *                   ╭────────╯        ╰────────╮                                          ╭────────╯        ╰────────╮
+ *                   │        │   E    │        ╰────────╮                        ╭────────╯        │    I   │        │
+ *          ╭────────╯   W    ╰────────╯   R    │        │                        │        │    U   ╰────────╯    O   ╰────────╮
+ *          │        ╰────────╯        ╰────────╯   T    │                        │    Y   ╰────────╯        ╰────────╯        │
+ * ╭────────╮   Q    │        │   D    │        ╰────────╯                        ╰────────╯        │    K   │        │    P   ╰────────╮
+ * │ (ALT)  ╰────────╯   S    ╰────────╯   F    │        │                        │        │    J   ╰────────╯    L   ╰────────╯        │
+ * │  Tab   │        ╰────────╯        ╰────────╯   G    │                        │    H   ╰────────╯    <   ╰────────╯    :   │ Bkspce │
+ * ╰────────╯   A    │        │   C    │        ╰────────╯                        ╰────────╯        │    ,   │    >   │    ;   ╰────────╯
+ * │ (CMD)  ╰────────╯   X    ╰────────╯   V    │        │       ╭────────╮       │        │    M   ╰────────╯    .   ╰────────╯    "   │
+ * │  Esc   │        ╰────────╯        ╰────────╯   B    │       │ Paste  │       │    N   ╰────────╯        ╰────────╯    ?   │    '   │
+ * ╰────────╯   Z    │                          ╰────────╯       │ Board  │       ╰────────╯                          │    /   ╰────────╯
+ * │        ╰────────╯    ╭────────╮    ╭────────╮               ╰─encodr─╯               ╭────────╮    ╭────────╮    ╰────────╯(Shift) │
+ * │  CTRL  │             │        │    │        ╰────────╮                      ╭────────╯        │    │ Paste  │             │ Enter  │
+ * ╰────────╯             │  Mute  │    │  RSE   │ (Shift)╰────────╮    ╭────────╯        │  Mute  │    │ Board  │             ╰────────╯
+ *                        ╰─encodr─╯    ╰────────╯ Space  │ (num)  │    │  (num) │  LWR   ╰────────╯    ╰─encodr─╯
+ *                                               ╰────────╯ Enter  │    │  - _   ╰────────╯
+ *                                                        ╰────────╯    ╰────────╯
  */
-
-// Default config uses home row mods. So hold each of the keys on the home row to use ctrl, gui, alt, or shift
 [_QWERTY] = LAYOUT_ffkb(
     ALTTAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,              KC_Y,    KC_U,     KC_I,     KC_O,    KC_P,     KC_BSPC,
     CMDESC,   KC_A,     KC_S,     KC_D,     KC_F,     KC_G,              KC_H,    KC_J,     KC_K,     KC_L,    KC_SCLN,  KC_QUOT,
     KC_LCTL,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,              KC_N,    KC_M,     KC_COMM,  KC_DOT,  KC_SLSH,  ALTENT,
-                        KC_MUTE,  RAISE,    SFTSPC,   NUMENT,            NUMMIN,  KC_SPC,   LOWER,    LCTL(KC_BSPC),
-                                                                KC_MUTE
+                        KC_MUTE,  RAISE,    SFTSPC,   NUMENT,            NUMMIN,  KC_SPC,   LOWER,    KC_MUTE,
+                                                                PSTBRD
 ),
 
 
-/* Raise
- *
- * ,-----------------------------------------.             ,-----------------------------------------.
- * |  `   |   1  |   2  |   3  |   4  |   5  |             |   6  |   7  |   8  |   9  |   0  |      |
- * |      |      |      |      |      |      |             |      |      |      |      |      |      |
- * |------+------+------+------+------+------|   ,------.  |------+------+------+------+------+------|
- * | Home | Left | Down |  Up  | Right| End  |   |ALTTAB|  |      |   -  |   =  |   [  |   ]  |      |
- * |      |      |      |      |      |      |             |      |      |      |      |      |      |
- * |------+------+------+------+------+------|   `------'  |------+------+------+------+------+------|
- * |      |      | PgDn | PgUp |      |      |             |      |      |      |      |      |      |
- * |      |      |      |      |      |      |             |      |      |      |      |      |      |
- * `-----------------------------------------'             `-----------------------------------------'
- *          ,------.        ,--------------------.    ,--------------------.        ,------.
- *          | MUTE |        |   \  | Enter| LOWER|    | RAISE| Space| Del  |        | DELW |
- *          `------'        `--------------------'    `--------------------.        `------'
+/* Layer: _RAISE
+ *                            ╭────────╮                                                            ╭────────╮
+ *                   ╭────────╯        ╰────────╮                                          ╭────────╯        ╰────────╮
+ *                   │        │        │        ╰────────╮                        ╭────────╯        │        │        │
+ *          ╭────────╯        ╰────────╯        │        │                        │        │        ╰────────╯        ╰────────╮
+ *          │        ╰────────╯        ╰────────╯        │                        │        ╰────────╯        ╰────────╯        │
+ * ╭────────╮        │        │        │        ╰────────╯                        ╰────────╯        │        │        │        ╰────────╮
+ * │ Shift/ ╰────────╯        ╰────────╯        │        │                        │        │        ╰────────╯        ╰────────╯        │
+ * │ Tab    │        ╰────────╯        ╰────────╯        │                        │        ╰────────╯        ╰────────╯        │        │
+ * ╰────────╯  Redo  │        │        │        ╰────────╯                        ╰────────╯        │        │        │        ╰────────╯
+ * │        ╰────────╯        ╰────────╯        │        │       ╭────────╮       │        │        ╰────────╯        ╰────────╯        │
+ * │  Undo  │        ╰────────╯        ╰────────╯ Bkspce │       │        │       │        ╰────────╯        ╰────────╯        │        │
+ * ╰────────╯        │                          ╰────────╯       │        │       ╰────────╯                          │        ╰────────╯
+ * │        ╰────────╯    ╭────────╮    ╭────────╮               ╰─encodr─╯               ╭────────╮    ╭────────╮    ╰────────╯        │
+ * │        │             │        │    │        ╰────────╮                      ╭────────╯        │    │        │             │        │
+ * ╰────────╯             │        │    │  RSE   │        ╰────────╮    ╭────────╯(Shift) │   LWR  │    │        │             ╰────────╯
+ *                        ╰─encodr─╯    ╰────────╯        │        │    │        │ Space  ╰────────╯    ╰─encodr─╯
+ *                                               ╰────────╯        │    │        ╰────────╯
+ *                                                        ╰────────╯    ╰────────╯
  */
 
 [_RAISE] = LAYOUT_ffkb(
-    KC_SFTB,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,           KC_TOPP,  KC_PRVWD, KC_UP,    KC_NXTWD, XXXXXXX,  KC_DEL,
-    KC_UNDO,  KC_REDO,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,           XXXXXXX,  KC_LEFT,  KC_DOWN,  KC_RGHT,  XXXXXXX,  XXXXXXX,
-    KC_LSFT,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BSPC,           KC_BOTP,  KC_LSTRT, XXXXXXX,  KC_LEND,  XXXXXXX,  KC_RSFT,
-                        _______,  _______,  _______,  _______,           _______,  _______,  _______,  _______,
+    SFTTAB,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,           PGTOP,    PRVWRD,   KC_UP,    NXTWRD,   XXXXXXX,  KC_DEL,
+    KCUNDO,   KCREDO,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,           XXXXXXX,  KC_LEFT,  KC_DOWN,  KC_RGHT,  XXXXXXX,  XXXXXXX,
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BSPC,           PGBOT,    LNBEG,    XXXXXXX,  LNEND,    XXXXXXX,  XXXXXXX,
+                        _______,  _______,  _______,  _______,           XXXXXXX,  SFTSPC,   _______,  _______,
                                                                 _______
 ),
 
 
-/* Lower
- *
- * ,-----------------------------------------.             ,-----------------------------------------.
- * |      |   !  |   @  |   #  |   $  |   %  |             |   ^  |   &  |   *  |   (  |   )  |      |
- * |      |      |      |      |      |      |             |      |      |      |      |      |      |
- * |------+------+------+------+------+------|   ,------.  |------+------+------+------+------+------|
- * |      |      |      |      |      |      |   |ALTTAB|  |      |   _  |   +  |   {  |   }  |      |
- * |      |      |      |      |      |      |             |      |      |      |      |      |      |
- * |------+------+------+------+------+------|   `------'  |------+------+------+------+------+------|
- * |      |  Caps|      |      |      |      |             |      |      |      |   |  |   "  |      |
- * |      |      |      |      |      |      |             |      |      |      |      |      |      |
- * `-----------------------------------------'             `-----------------------------------------'
- *          ,------.        ,--------------------.    ,--------------------.        ,------.
- *          | MUTE |        |   \  | Enter| LOWER|    | RAISE| Space| Del  |        | DELW |
- *          `------'        `--------------------'    `--------------------.        `------'
+/* Layer: _LOWER
+ *                            ╭────────╮                                                            ╭────────╮
+ *                   ╭────────╯        ╰────────╮                                          ╭────────╯        ╰────────╮
+ *                   │        │        │        ╰────────╮                        ╭────────╯        │        │        │
+ *          ╭────────╯        ╰────────╯        │        │                        │        │        ╰────────╯        ╰────────╮
+ *          │        ╰────────╯        ╰────────╯        │                        │        ╰────────╯        ╰────────╯        │
+ * ╭────────╮        │        │        │        ╰────────╯                        ╰────────╯        │        │        │        ╰────────╮
+ * │        ╰────────╯        ╰────────╯        │        │                        │        │        ╰────────╯        ╰────────╯        │
+ * │        │        ╰────────╯        ╰────────╯        │                        │        ╰────────╯        ╰────────╯        │        │
+ * ╰────────╯        │        │        │        ╰────────╯                        ╰────────╯        │        │        │        ╰────────╯
+ * │        ╰────────╯        ╰────────╯        │        │       ╭────────╮       │        │        ╰────────╯        ╰────────╯        │
+ * │        │        ╰────────╯        ╰────────╯        │       │        │       │        ╰────────╯        ╰────────╯        │        │
+ * ╰────────╯        │                          ╰────────╯       │        │       ╰────────╯                          │        ╰────────╯
+ * │        ╰────────╯    ╭────────╮    ╭────────╮               ╰─encodr─╯               ╭────────╮    ╭────────╮    ╰────────╯        │
+ * │        │             │        │    │        ╰────────╮                      ╭────────╯        │    │        │             │        │
+ * ╰────────╯             │        │    │        │        ╰────────╮    ╭────────╯        │        │    │        │             ╰────────╯
+ *                        ╰─encodr─╯    ╰────────╯        │        │    │        │        ╰────────╯    ╰─encodr─╯
+ *                                               ╰────────╯        │    │        ╰────────╯
+ *                                                        ╰────────╯    ╰────────╯
  */
+
 [_LOWER] = LAYOUT_ffkb(
-    XXXXXXX,  KC_EXLM,  KC_AT,    KC_HASH,  KC_DLR,   KC_PERC,           KC_CIRC,  KC_AMPR,  KC_ASTR,  KC_LPRN,  KC_RPRN,  _______,
-    KC_IMP,   XXXXXXX,  KC_CLAW,  KC_LPRN,  KC_RPRN,  KC_LCBR,           KC_RCBR,  KC_PLUS,  KC_EQL,   KC_GRV,   KC_BSLS,  XXXXXXX,
-    KC_LSFT,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_LBRC,           KC_RBRC,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-                        SCRNCAP,  _______,  _______,  _______,           _______,  _______,  _______,  XXXXXXX,
+    KC_IMP,   KC_EXLM,  KC_AT,    KC_HASH,  KC_DLR,   KC_PERC,           KC_CIRC,  KC_AMPR,  KC_ASTR,  KC_LPRN,  KC_RPRN,  _______,
+    CMDESC,   XXXXXXX,  THECLAW,  KC_LPRN,  KC_RPRN,  KC_LCBR,           KC_RCBR,  KC_EQL,   KC_GRV,   XXXXXXX,  KC_BSLS,  XXXXXXX,
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_LBRC,           KC_RBRC,  KC_PLUS,  KC_TILD,  XXXXXXX,  KC_PIPE,  XXXXXXX,
+                        SCRNCAP,  _______,  _______,  _______,           _______,  KC_LSFT,  _______,  XXXXXXX,
                                                                 _______
 ),
 
 
-/* Adjust
- *
- * ,-----------------------------------------.             ,-----------------------------------------.
- * |      |   !  |   @  |   #  |   $  |   %  |             |   ^  |   &  |   *  |   (  |   )  |      |
- * |------+------+------+------+------+------|   ,------.  |------+------+------+------+------+------|
- * |      |      |      |      |      |      |   |ALTTAB|  |      |   _  |   +  |   {  |   }  |      |
- * |------+------+------+------+------+------|   `------'  |------+------+------+------+------+------|
- * |      |  Caps|      |      |      |      |             |      |      |      |   |  |   "  |      |
- * `-----------------------------------------'             `-----------------------------------------'
- *          ,------.        ,--------------------.    ,--------------------.        ,------.
- *          | MUTE |        |   \  | Enter| LOWER|    | RAISE| Space| Del  |        | DELW |
- *          `------'        `--------------------'    `--------------------.        `------'
+/* Layer: _ADJUST
+ *                            ╭────────╮                                                            ╭────────╮
+ *                   ╭────────╯        ╰────────╮                                          ╭────────╯        ╰────────╮
+ *                   │        │        │        ╰────────╮                        ╭────────╯        │        │        │
+ *          ╭────────╯        ╰────────╯        │        │                        │        │        ╰────────╯        ╰────────╮
+ *          │        ╰────────╯        ╰────────╯        │                        │        ╰────────╯        ╰────────╯        │
+ * ╭────────╮        │        │        │        ╰────────╯                        ╰────────╯        │        │        │        ╰────────╮
+ * │        ╰────────╯        ╰────────╯        │        │                        │        │        ╰────────╯        ╰────────╯        │
+ * │        │        ╰────────╯        ╰────────╯        │                        │        ╰────────╯        ╰────────╯        │        │
+ * ╰────────╯        │        │        │        ╰────────╯                        ╰────────╯        │        │        │        ╰────────╯
+ * │        ╰────────╯        ╰────────╯        │        │       ╭────────╮       │        │        ╰────────╯        ╰────────╯        │
+ * │        │        ╰────────╯        ╰────────╯        │       │        │       │        ╰────────╯        ╰────────╯        │        │
+ * ╰────────╯        │                          ╰────────╯       │        │       ╰────────╯                          │        ╰────────╯
+ * │        ╰────────╯    ╭────────╮    ╭────────╮               ╰─encodr─╯               ╭────────╮    ╭────────╮    ╰────────╯        │
+ * │        │             │        │    │        ╰────────╮                      ╭────────╯        │    │        │             │        │
+ * ╰────────╯             │        │    │        │        ╰────────╮    ╭────────╯        │        │    │        │             ╰────────╯
+ *                        ╰─encodr─╯    ╰────────╯        │        │    │        │        ╰────────╯    ╰─encodr─╯
+ *                                               ╰────────╯        │    │        ╰────────╯
+ *                                                        ╰────────╯    ╰────────╯
  */
+
 [_ADJUST] = LAYOUT_ffkb(
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  W_TTHRD,  XXXXXXX,  RGB_RMOD,          RGB_MOD,  XXXXXXX,  W_THALF,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    XXXXXXX,  XXXXXXX,  W_SHOW,   W_TTHRD,  XXXXXXX,  RGB_RMOD,          RGB_MOD,  XXXXXXX,  W_THALF,  XXXXXXX,  XXXXXXX,  XXXXXXX,
     XXXXXXX,  XXXXXXX,  W_LTHRD,  W_MAX,    W_RTHRD,  RGB_HUD,           RGB_HUI,  W_LHALF,  W_CENT,   W_RHALF,  XXXXXXX,  XXXXXXX,
     XXXXXXX,  XXXXXXX,  XXXXXXX,  W_BTHRD,  XXXXXXX,  RGB_VAD,           RGB_VAI,  XXXXXXX,  W_BHALF,  XXXXXXX,  XXXXXXX,  XXXXXXX,
                         XXXXXXX,  _______,  XXXXXXX,  RGB_SPD,           RGB_SPI,  XXXXXXX,  _______,  XXXXXXX,
@@ -165,36 +207,73 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 
-/* Numrow
-
- * ,-----------------------------------------.             ,-----------------------------------------.
- * |      |   1  |   2  |   3  |   4  |   5  |             |  6   |  7   |  8   |  9   |  0   |      |
- * |      |      |      |      |      |      |             |      |      |      |      |      |      |
- * |------+------+------+------+------+------|   ,------.  |------+------+------+------+------+------|
- * |      |   6  |   7  |   8  |   9  |   0  |   |ALTTAB|  |      |      |      |      |      |      |
- * |      |      |      |      |      |      |             |      |      |      |      |      |      |
- * |------+------+------+------+------+------|   `------'  |------+------+------+------+------+------|
- * |      |      |      |      |      |      |             |      |      |      |      |      |      |
- * |      |      |      |      |      |      |             |      |      |      |      |      |      |
- * `-----------------------------------------'             `-----------------------------------------'
- *          ,------.        ,--------------------.    ,--------------------.        ,------.
- *          | MUTE |        |   \  | Enter| LOWER|    | RAISE| Space| Del  |        | DELW |
- *          `------'        `--------------------'    `--------------------.        `------'
+/* Layer: _NUM
+ *                            ╭────────╮                                                            ╭────────╮
+ *                   ╭────────╯        ╰────────╮                                          ╭────────╯        ╰────────╮
+ *                   │        │        │        ╰────────╮                        ╭────────╯        │        │        │
+ *          ╭────────╯        ╰────────╯        │        │                        │        │        ╰────────╯        ╰────────╮
+ *          │        ╰────────╯        ╰────────╯        │                        │        ╰────────╯        ╰────────╯        │
+ * ╭────────╮        │        │        │        ╰────────╯                        ╰────────╯        │        │        │        ╰────────╮
+ * │        ╰────────╯        ╰────────╯        │        │                        │        │        ╰────────╯        ╰────────╯        │
+ * │        │        ╰────────╯        ╰────────╯        │                        │        ╰────────╯        ╰────────╯        │        │
+ * ╰────────╯        │        │        │        ╰────────╯                        ╰────────╯        │        │        │        ╰────────╯
+ * │        ╰────────╯        ╰────────╯        │        │       ╭────────╮       │        │        ╰────────╯        ╰────────╯        │q
+ * │        │        ╰────────╯        ╰────────╯        │       │        │       │        ╰────────╯        ╰────────╯        │        │
+ * ╰────────╯        │                          ╰────────╯       │        │       ╰────────╯                          │        ╰────────╯
+ * │        ╰────────╯    ╭────────╮    ╭────────╮               ╰─encodr─╯               ╭────────╮    ╭────────╮    ╰────────╯        │
+ * │        │             │        │    │        ╰────────╮                      ╭────────╯        │    │        │             │        │
+ * ╰────────╯             │        │    │        │        ╰────────╮    ╭────────╯        │        │    │        │             ╰────────╯
+ *                        ╰─encodr─╯    ╰────────╯        │        │    │        │        ╰────────╯    ╰─encodr─╯
+ *                                               ╰────────╯        │    │        ╰────────╯
+ *                                                        ╰────────╯    ╰────────╯
  */
 [_NUM] =  LAYOUT_ffkb(
-    XXXXXXX,  KC_1,     KC_2,     KC_3,     KC_4,     KC_5,              KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     _______,
-    XXXXXXX,  KC_6,     KC_7,     KC_8,     KC_9,     KC_0,              XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  _______,
-    KC_LSFT,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_COMM,  KC_DOT,            XXXXXXX,  XXXXXXX,  _______,  _______,  _______,  _______,
-                        _______,  _______,  _______,  _______,           _______,  _______,  _______,  _______,
+    _______,  KC_1,     KC_2,     KC_3,     KC_4,     KC_5,              KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     _______,
+    _______,  KC_6,     KC_7,     KC_8,     KC_9,     KC_0,              XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  _______,
+    _______,  KC_EQL,   KC_PLUS,  KC_MINS,  KC_COMM,  KC_DOT,            XXXXXXX,  XXXXXXX,  _______,  _______,  _______,  _______,
+                        _______,  _______,  SFTSPC,   _______,           _______,  SFTSPC,   _______,  _______,
                                                                 _______
 )
+
+/* Layer: SAMPLE
+ *                            ╭────────╮                                                            ╭────────╮
+ *                   ╭────────╯        ╰────────╮                                          ╭────────╯        ╰────────╮
+ *                   │        │        │        ╰────────╮                        ╭────────╯        │        │        │
+ *          ╭────────╯        ╰────────╯        │        │                        │        │        ╰────────╯        ╰────────╮
+ *          │        ╰────────╯        ╰────────╯        │                        │        ╰────────╯        ╰────────╯        │
+ * ╭────────╮        │        │        │        ╰────────╯                        ╰────────╯        │        │        │        ╰────────╮
+ * │        ╰────────╯        ╰────────╯        │        │                        │        │        ╰────────╯        ╰────────╯        │
+ * │        │        ╰────────╯        ╰────────╯        │                        │        ╰────────╯        ╰────────╯        │        │
+ * ╰────────╯        │        │        │        ╰────────╯                        ╰────────╯        │        │        │        ╰────────╯
+ * │        ╰────────╯        ╰────────╯        │        │       ╭────────╮       │        │        ╰────────╯        ╰────────╯        │
+ * │        │        ╰────────╯        ╰────────╯        │       │        │       │        ╰────────╯        ╰────────╯        │        │
+ * ╰────────╯        │                          ╰────────╯       │        │       ╰────────╯                          │        ╰────────╯
+ * │        ╰────────╯    ╭────────╮    ╭────────╮               ╰─encodr─╯               ╭────────╮    ╭────────╮    ╰────────╯        │
+ * │        │             │        │    │        ╰────────╮                      ╭────────╯        │    │        │             │        │
+ * ╰────────╯             │        │    │        │        ╰────────╮    ╭────────╯        │        │    │        │             ╰────────╯
+ *                        ╰─encodr─╯    ╰────────╯        │        │    │        │        ╰────────╯    ╰─encodr─╯
+ *                                               ╰────────╯        │    │        ╰────────╯
+ *                                                        ╰────────╯    ╰────────╯
+ *
+ *[_SAMPLE] = LAYOUT_ffkb(
+ *  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,           XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+ *  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,           XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+ *  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,           XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+ *                      XXXXXXX,  _______,  XXXXXXX,  XXXXXXX,           XXXXXXX,  XXXXXXX,  _______,  XXXXXXX,
+ *                                                              _______
+ *),
+ */
 };
 
 
-
-// layer_state_t layer_state_set_user(layer_state_t state) {
-//   return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
-// }
+bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case SFTSPC:
+            return true;
+        default:
+            return false;
+    }
+}
 
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -234,238 +313,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
             }
             break;
-        case KC_SFTB:
-            if (record->event.pressed) {
-                register_code(KC_LSFT);
-                register_code(KC_TAB);
-            } else {
-                unregister_code(KC_TAB);
-                unregister_code(KC_LSFT);
-            }
-            break;
-        case KC_PRVWD:
-            if (record->event.pressed) {
-                register_code(KC_LALT);
-                register_code(KC_LEFT);
-            } else {
-                unregister_code(KC_LALT);
-                unregister_code(KC_LEFT);
-            }
-            break;
-        case KC_NXTWD:
-            if (record->event.pressed) {
-                register_code(KC_LALT);
-                register_code(KC_RGHT);
-            } else {
-                unregister_code(KC_LALT);
-                unregister_code(KC_RGHT);
-            }
-            break;
-        case KC_LSTRT:
-            if (record->event.pressed) {
-                register_code(KC_LGUI);
-                register_code(KC_LEFT);
-            } else {
-                unregister_code(KC_LGUI);
-                unregister_code(KC_LEFT);
-            }
-            break;
-        case KC_LEND:
-            if (record->event.pressed) {
-                register_code(KC_LGUI);
-                register_code(KC_RGHT);
-            } else {
-                unregister_code(KC_LGUI);
-                unregister_code(KC_RGHT);
-            }
-            break;
-        case KC_TOPP:
-            if (record->event.pressed) {
-                register_code(KC_LGUI);
-                register_code(KC_UP);
-            } else {
-                unregister_code(KC_LGUI);
-                unregister_code(KC_UP);
-            }
-            break;
-        case KC_BOTP:
-            if (record->event.pressed) {
-                register_code(KC_LGUI);
-                register_code(KC_DOWN);
-            } else {
-                unregister_code(KC_LGUI);
-                unregister_code(KC_DOWN);
-            }
-            break;
-        case KC_UNDO:
-            if (record->event.pressed) {
-                register_code(KC_LGUI);
-                register_code(KC_Z);
-            } else {
-                unregister_code(KC_LGUI);
-                unregister_code(KC_Z);
-            }
-            break;
-        case KC_REDO:
-            if (record->event.pressed) {
-                register_code(KC_LGUI);
-                register_code(KC_LSFT);
-                register_code(KC_Z);
-            } else {
-                unregister_code(KC_LGUI);
-                unregister_code(KC_LSFT);
-                unregister_code(KC_Z);
-            }
-            break;
-        case PSTBRD:
-            if (record->event.pressed) {
-                register_code(KC_LGUI);
-                register_code(KC_LALT);
-                register_code(KC_V);
-            } else {
-                unregister_code(KC_LGUI);
-                unregister_code(KC_LALT);
-                unregister_code(KC_V);
-            }
-            break;
-        case SCRNCAP:
-            if (record->event.pressed) {
-                register_code(KC_LSFT);
-                register_code(KC_LCTL);
-                register_code(KC_LGUI);
-                register_code(KC_4);
-            } else {
-                unregister_code(KC_LSFT);
-                unregister_code(KC_LCTL);
-                unregister_code(KC_LGUI);
-                unregister_code(KC_4);
-            }
-            break;
-        case KC_CLAW:
-            if (record->event.pressed) {
-                register_code(KC_LGUI);
-                register_code(KC_LALT);
-                register_code(KC_LSFT);
-                register_code(KC_S);
-            } else {
-                unregister_code(KC_LGUI);
-                unregister_code(KC_LALT);
-                unregister_code(KC_LSFT);
-                unregister_code(KC_S);
-            }
-            break;
-        case W_LHALF:
-            if (record->event.pressed) {
-                register_code(KC_LGUI);
-                register_code(KC_LCTL);
-                register_code(KC_LEFT);
-            } else {
-                unregister_code(KC_LGUI);
-                unregister_code(KC_LCTL);
-                unregister_code(KC_LEFT);
-            }
-            break;
-        case W_RHALF:
-            if (record->event.pressed) {
-                register_code(KC_LGUI);
-                register_code(KC_LCTL);
-                register_code(KC_RGHT);
-            } else {
-                unregister_code(KC_LGUI);
-                unregister_code(KC_LCTL);
-                unregister_code(KC_RGHT);
-            }
-            break;
-        case W_THALF:
-            if (record->event.pressed) {
-                register_code(KC_LGUI);
-                register_code(KC_LCTL);
-                register_code(KC_UP);
-            } else {
-                unregister_code(KC_LGUI);
-                unregister_code(KC_LCTL);
-                unregister_code(KC_UP);
-            }
-            break;
-        case W_BHALF:
-            if (record->event.pressed) {
-                register_code(KC_LGUI);
-                register_code(KC_LCTL);
-                register_code(KC_DOWN);
-            } else {
-                unregister_code(KC_LGUI);
-                unregister_code(KC_LCTL);
-                unregister_code(KC_DOWN);
-            }
-            break;
-        case W_LTHRD:
-            if (record->event.pressed) {
-                register_code(KC_LALT);
-                register_code(KC_LCTL);
-                register_code(KC_LEFT);
-            } else {
-                unregister_code(KC_LALT);
-                unregister_code(KC_LCTL);
-                unregister_code(KC_LEFT);
-            }
-            break;
-        case W_RTHRD:
-            if (record->event.pressed) {
-                register_code(KC_LALT);
-                register_code(KC_LCTL);
-                register_code(KC_RGHT);
-            } else {
-                unregister_code(KC_LALT);
-                unregister_code(KC_LCTL);
-                unregister_code(KC_RGHT);
-            }
-            break;
-        case W_TTHRD:
-            if (record->event.pressed) {
-                register_code(KC_LALT);
-                register_code(KC_LCTL);
-                register_code(KC_UP);
-            } else {
-                unregister_code(KC_LALT);
-                unregister_code(KC_LCTL);
-                unregister_code(KC_UP);
-            }
-            break;
-        case W_BTHRD:
-            if (record->event.pressed) {
-                register_code(KC_LALT);
-                register_code(KC_LCTL);
-                register_code(KC_DOWN);
-            } else {
-                unregister_code(KC_LALT);
-                unregister_code(KC_LCTL);
-                unregister_code(KC_DOWN);
-            }
-            break;
-        case W_MAX:
-            if (record->event.pressed) {
-                register_code(KC_LGUI);
-                register_code(KC_LALT);
-                register_code(KC_LCTL);
-                register_code(KC_F);
-            } else {
-                unregister_code(KC_LGUI);
-                unregister_code(KC_LALT);
-                unregister_code(KC_LCTL);
-                unregister_code(KC_F);
-            }
-            break;
-        case W_CENT:
-            if (record->event.pressed) {
-                register_code(KC_LGUI);
-                register_code(KC_LALT);
-                register_code(KC_C);
-            } else {
-                unregister_code(KC_LGUI);
-                unregister_code(KC_LALT);
-                unregister_code(KC_C);
-            }
-            break;
     }
 
     return true;
@@ -476,7 +323,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #ifdef ENCODER_ENABLE
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
-    if (index == 0) {
+    if (index == 0) {  // Roller Encoder LEft
         switch(biton32(layer_state)) {
         case _QWERTY:
             alt_tab_timer = timer_read();
@@ -492,67 +339,40 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             break;
 
         case _LOWER:
-            if (clockwise) {
-                tap_code(KC_RGHT);
-            } else {
-                tap_code(KC_LEFT);
-            }
-            break;
-
-        // case _ADJUST:
-        //     if (clockwise) {
-        //         rgblight_step();
-        //     } else {
-        //         rgblight_step_reverse();
-        //     }
-        //     break;
-        }
-
-    } else if (index == 1) {
-        switch(biton32(layer_state)) {
-        case _QWERTY:
-            if (clockwise) {
-                tap_code(KC_VOLU);
-            } else {
-                tap_code(KC_VOLD);
-            }
-            break;
-        case _RAISE:
-            if (clockwise) {
+           if (clockwise) {
                 register_code16(KC_LGUI);
-                register_code16(KC_LALT);
-                tap_code(KC_RGHT);
+                tap_code(KC_GRV);
                 unregister_code16(KC_LGUI);
-                unregister_code16(KC_LALT);
             } else {
                 register_code16(KC_LGUI);
-                register_code16(KC_LALT);
-                tap_code(KC_LEFT);
+                register_code16(KC_LSFT);
+                tap_code(KC_GRV);
                 unregister_code16(KC_LGUI);
-                unregister_code16(KC_LALT);
-            }
-            break;
-
-        // case _ADJUST:
-        //     if (clockwise) {
-        //         rgblight_increase_hue();
-        //     } else {
-        //         rgblight_decrease_hue();
-        //     }
-        //     break;
-        }
-    } else if (index == 2) {
-        switch(biton32(layer_state)) {
-        case _QWERTY:
-            if (clockwise) {
-                tap_code(KC_VOLU);
-            } else {
-                tap_code(KC_VOLD);
+                unregister_code16(KC_LSFT);
             }
             break;
 
         case _RAISE:
             if (clockwise) {
+                rgb_matrix_step();
+            } else {
+                rgb_matrix_step_reverse();
+            }
+            break;
+
+        case _ADJUST:
+            if (clockwise) {
+                rgb_matrix_increase_hue();
+            } else {
+                rgb_matrix_decrease_hue();
+            }
+            break;
+        }
+
+    } else if (index == 1) {  // Roller Encoder Right
+        switch(biton32(layer_state)) {
+        case _QWERTY:
+           if (clockwise) {
                 register_code16(KC_LGUI);
                 register_code16(KC_LALT);
                 tap_code(KC_RGHT);
@@ -564,32 +384,62 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 tap_code(KC_LEFT);
                 unregister_code16(KC_LGUI);
                 unregister_code16(KC_LALT);
+            }
+            break;
+        case _RAISE:
+            if (clockwise) {
+                tap_code(KC_RGHT);
+            } else {
+                tap_code(KC_LEFT);
             }
             break;
 
         case _LOWER:
             if (clockwise) {
-                register_code16(KC_LGUI);
-                register_code16(KC_LALT);
-                tap_code(KC_RGHT);
-                unregister_code16(KC_LGUI);
-                unregister_code16(KC_LALT);
+                rgb_matrix_increase_val();
             } else {
-                register_code16(KC_LGUI);
-                register_code16(KC_LALT);
-                tap_code(KC_LEFT);
-                unregister_code16(KC_LGUI);
-                unregister_code16(KC_LALT);
+                rgb_matrix_decrease_val();
             }
             break;
 
-        // case _ADJUST:
+        case _ADJUST:
+            if (clockwise) {
+                rgb_matrix_increase_speed();
+            } else {
+                rgb_matrix_decrease_speed();
+            }
+            break;
+        }
+    } else if (index == 2) {  // Central Encoder
+        switch(biton32(layer_state)) {
+        case _QWERTY:
+            if (clockwise) {
+                tap_code(KC_VOLU);
+            } else {
+                tap_code(KC_VOLD);
+            }
+            break;
+        // case _RAISE:
         //     if (clockwise) {
-        //         rgblight_increase_hue();
+        //
         //     } else {
-        //         rgblight_decrease_hue();
+        //
         //     }
         //     break;
+        // case _LOWER:
+        //     if (clockwise) {
+        //
+        //     } else {
+        //
+        //     }
+        //     break;
+        case _ADJUST:
+            if (clockwise) {
+                rgb_matrix_step();
+            } else {
+                rgb_matrix_step_reverse();
+            }
+            break;
         }
     }
     return true;
@@ -695,14 +545,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
 // Runs just one time when the keyboard initializes.
 void matrix_scan_user(void) {
-    // static bool has_ran_yet = false;
-    // if (!has_ran_yet) {
-        // has_ran_yet = true;
-        // rgblight_mode(RGBLIGHT_MODE_RAINBOW_SWIRL + 4);
-        // rgblight_mode(RGBLIGHT_MODE_BREATHING + 1);
-        // rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
-        // rgblight_sethsv(HSV_CHARTREUSE);
-    // }
     if (is_alt_tab_active) {
       if (timer_elapsed(alt_tab_timer) > 750) {
         unregister_code(KC_LGUI);

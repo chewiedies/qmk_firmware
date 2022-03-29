@@ -1,10 +1,19 @@
-#define PERMISSIVE_HOLD
+// #define IGNORE_MOD_TAP_INTERRUPT
+// #define PERMISSIVE_HOLD
+#define TAPPING_FORCE_HOLD_PER_KEY
 
-#undef TAPPING_TERM
-#define TAPPING_TERM 200
+#ifdef TAPPING_TERM
+    #undef TAPPING_TERM
+    #define TAPPING_TERM 250
+#endif
+
+#ifdef ENCODER_RESOLUTION
+    #undef ENCODER_RESOLUTION
+    #define ENCODER_RESOLUTIONS { 4, 4, 4 }
+#endif
 
 #undef ENCODERS_PAD_A
-#define ENCODERS_PAD_A {D5, B6, D0}
+#define ENCODERS_PAD_A {B7, F1, D0}
 
 #undef ENCODERS_PAD_B
-#define ENCODERS_PAD_B {B7, F1, D1}
+#define ENCODERS_PAD_B {D5, B6, D1}
