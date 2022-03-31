@@ -1,0 +1,7 @@
+#define MO_LOWR MO(_LOWER)
+#define MO_HGHR MO(_HIGHER)
+#define LT_S LT(_NAVI, KC_S)
+#define LT_SPC LT(_LAYER4, KC_SPC)
+#define MO_ADST MO(_ADJUST)
+#define KC_CLIP LGUI(LSFT(KC_S))
+#define KC_WIND LALT(KC_PSCR)
