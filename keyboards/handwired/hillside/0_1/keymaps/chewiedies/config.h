@@ -34,3 +34,16 @@
 // #define RGBLIGHT_EFFECT_BREATHE_MAX 125
 // #define RGBLIGHT_EFFECT_BREATHE_CENTER 1.7
 #define RGBLIGHT_SLEEP
+
+/* oled stuff */
+#ifdef OLED_ENABLE
+    #ifdef OLED_TIMEOUT
+        #undef OLED_TIMEOUT
+        #define OLED_TIMEOUT 120000
+    #endif
+
+    #ifdef OLED_BRIGHTNESS
+        #undef OLED_BRIGHTNESS
+        #define OLED_BRIGHTNESS 120
+    #endif
+#endif
