@@ -30,7 +30,7 @@ please replace this if you modify the code
 #define PRODUCT_ID      0x6463
 /* Change these if you modify the code */
 
-#define DEVICE_VER      0xFFFC
+#define DEVICE_VER      0x0001
 #define MANUFACTURER    doodboard
 #define PRODUCT         owl
 

@@ -16,7 +16,7 @@
 
 #include "quantum.h"
 
-#define LAYOUT_BRICK(\
+#define LAYOUT_brick(\
     K00, K10, K20, K30, K40, K50, K60, K70, \
     K01, K11, K21, K31, K41, K51, K61, K71, \
     K02, K12, K22, K32, K42, K52, K62, K72, \
@@ -56,7 +56,7 @@
  *
  */
 
-#define LAYOUT_ALICE(\
+#define LAYOUT_alice(\
     K41, K40, K60, K70,   K50, K10, K00, K30,   K35, K55, K15, K05,   K75, K65, K25,    \
          K61, K71,      K51, K11, K01, K31,   K36, K56, K16, K06,   K76, K66, K46, K26, \
          K62, K72,    K52, K12, K02, K32,       K37, K57, K17, K07,   K77, K67, K27,    \
