@@ -295,7 +295,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 register_code(KC_LGUI);
                 register_code(KC_LCTL);
                 register_code(KC_LEFT);
-            } else { 
+            } else {
                 unregister_code(KC_LGUI);
                 unregister_code(KC_LCTL);
                 unregister_code(KC_LEFT);
@@ -345,7 +345,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 register_code(KC_LEFT);
             } else {
                 unregister_code(KC_LALT);
-                unregister_code(KC_LCTL); 
+                unregister_code(KC_LCTL);
                 unregister_code(KC_LEFT);
             }
             break;
@@ -405,7 +405,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 register_code(KC_LGUI);
                 register_code(KC_LALT);
                 register_code(KC_C);
-            } else { 
+            } else {
                 unregister_code(KC_LGUI);
                 unregister_code(KC_LALT);
                 unregister_code(KC_C);
@@ -439,7 +439,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_RGHT);
             }
             break;
-            
+
         case W_TLEFT:
             if (record->event.pressed) {
                 register_code(KC_LCTL);
@@ -468,7 +468,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 register_code(KC_LCTL);
                 register_code(KC_LGUI);
-                register_code(KC_2); 
+                register_code(KC_2);
             } else {
                 unregister_code(KC_LCTL);
                 unregister_code(KC_LGUI);
@@ -517,15 +517,15 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             }
             break;
 
-        case _ADJUST:
-            if (clockwise) {
-                rgblight_step();
-            } else {
-                rgblight_step_reverse();
-            }
-            break;
+        // case _ADJUST:
+        //     if (clockwise) {
+        //         rgblight_step();
+        //     } else {
+        //         rgblight_step_reverse();
+        //     }
+        //     break;
         }
-        
+
     } else if (index == 1) {
         switch(biton32(layer_state)) {
         case _QWERTY:
@@ -551,14 +551,14 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 unregister_code16(KC_LALT);
             }
             break;
-        
-        case _ADJUST:
-            if (clockwise) { 
-                rgblight_increase_hue();
-            } else {
-                rgblight_decrease_hue();
-            }
-            break;
+
+        // case _ADJUST:
+        //     if (clockwise) {
+        //         rgblight_increase_hue();
+        //     } else {
+        //         rgblight_decrease_hue();
+        //     }
+        //     break;
         }
     }
     return true;
@@ -570,7 +570,7 @@ void matrix_scan_user(void) {
     // static bool has_ran_yet = false;
     // if (!has_ran_yet) {
     //     has_ran_yet = true;
-    //     rgblight_mode(RGBLIGHT_MODE_RAINBOW_SWIRL + 3); 
+    //     rgblight_mode(RGBLIGHT_MODE_RAINBOW_SWIRL + 3);
     //     // rgblight_mode(RGBLIGHT_MODE_BREATHING + 1);
     //     // rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
     //     // rgblight_sethsv(HSV_YELLOW);
