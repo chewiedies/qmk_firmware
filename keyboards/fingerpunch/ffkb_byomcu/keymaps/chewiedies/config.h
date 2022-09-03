@@ -1,6 +1,18 @@
-// #define IGNORE_MOD_TAP_INTERRUPT
-// #define PERMISSIVE_HOLD
-#define TAPPING_FORCE_HOLD_PER_KEY
+√#ifdef PERMISSIVE_HOLD
+    #undef PERMISSIVE_HOLD
+#endif
+
+#ifdef IGNORE_MOD_TAP_INTERRUPT
+    #undef IGNORE_MOD_TAP_INTERRUPT
+#endif
+
+#ifdef TAPPING_FORCE_HOLD
+    #undef TAPPING_FORCE_HOLD
+#endif
+
+#ifdef TAPPING_FORCE_HOLD_PER_KEY
+    #undef TAPPING_FORCE_HOLD_PER_KEY
+#endif
 
 #ifdef TAPPING_TERM
     #undef TAPPING_TERM
@@ -17,3 +29,6 @@
 
 #undef ENCODERS_PAD_B
 #define ENCODERS_PAD_B {D5, B6, D1}
+
+// COMBO STUFF
+#define COMBO_COUNT 2

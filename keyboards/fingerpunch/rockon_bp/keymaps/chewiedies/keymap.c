@@ -66,23 +66,89 @@ bool is_caps_lock_on;
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
+/* _QWERTY Keymap
+ *                                    ┌───────┐                                                                          ┌───────┐
+ *                                    │   #   ├───────┐                                                          ┌───────┤   *   │
+ *                            ┌───────┤   3   │   $   ├───────┐                                          ┌───────┤   &   │   8   ├───────┐
+ *           ┌────────┬───────┤   @   ├───────┤   4   │   %   ├───────┐                          ┌───────┤   ^   │   7   ├───────┤   (   ├───────┬─────────┐
+ *           │        │   !   │   2   │       ├───────┤   5   │   -   │                          │   +   │   6   ├───────┤       │   9   │   )   │         │
+ *           │  ESC   │   1   ├───────┤   E   │       ├───────┤   __  │                          │   =   ├───────┤       │   I   ├───────┤   0   │(Adjust) │
+ *           ├────────┼───────┤       ├───────┤   R   │       ├───────┤                          ├───────┤       │   U   ├───────┤       ├───────┼─────────┤
+ *           │        │       │   W   │       ├───────┤   T   │   ~   │                          │   |   │   Y   ├───────┤       │   O   │       │         │
+ *           │  TAB   │   Q   ├───────┤   D   │       ├───────┤   `   │                          │   \   ├───────┤       │   K   ├───────┤   P   │ Bkspace │
+ *           ├────────┼───────┤       ├───────┤   F   │       ├───────┤                          ├───────┤       │   J   ├───────┤       ├───────┼─────────┤
+ *           │  ESC   │       │   S   │       ├───────┤   G   │       │                          │       │   H   ├───────┤   <   │   L   │   :   │    "    │
+ *           │ (CMD)  │   A   ├───────┤   C   │       ├───────┤   {   │                          │   }   ├───────┤       │   ,   ├───────┤   ;   │    '    │
+ *           ├────────┼───────┤       ├───────┤   V   │       ├───────┤                          ├───────┤       │   M   ├───────┤   >   ├───────┼─────────┤
+ *           │        │       │   X   │       ├───────┤   B   │ MS    │                          │  MS   │   N   ├───────┤       │   .   │   ?   │  Enter  │
+ *           │ (CTRL) │   Z   ├───────┤ (ALT) │       ├───────┤ LCLK  │                          │  RCLK ├───────┤       │ (ALT) ├───────┤   /   │ (Shift) │
+ *           └────────┴───────┤       ├───────┤ (RSE) │ Space ├───────┤                          ├───────┤       │ (LWR) ├───────┤       ├───────┴─────────┘
+ *                            │       │       └───────┤(Shift)│ Enter │                          │  -_   │ Space ├───────┘       │  Mute │
+ *                            └───⍥───┘               └───────┤(NUMRW)│                          │(NUMRW)├───────┘               └───⍥───┘
+ *                                                            └───────┘                          └───────┘
+ */
+
 [_QWERTY] = LAYOUT_rockon_bp(
-    KC_ESC,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_MINS,                          KC_EQL,    KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     ADJUST,
-    ALTTAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_GRV,                           KC_BSLS,   KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_BSPC,
+    KC_ESC,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_MINS,                          KC_EQL,    KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_GRV,
+    ALTTAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_BSPC,                          KC_BSLS,   KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_BSPC,
     CMDESC,   KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_LCBR,                          KC_RCBR,   KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,
     KC_LCTL,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_BTN1,                          KC_BTN2,   KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  SFTENT,
                         XXXXXXX,  KC_LALT,  RAISE,    SFTSPC,   NUMENT,    PSTBRD,     KC_MUTE,   NUMMIN,    KC_SPC,   LOWER,    KC_RALT,  XXXXXXX
 ),
 
 
+
+
+/* _LOWER Keymap
+ *                                    ┌───────┐                                                                          ┌───────┐
+ *                                    │       ├───────┐                                                          ┌───────┤       │
+ *                            ┌───────┤       │       ├───────┐                                          ┌───────┤       │       ├───────┐
+ *           ┌────────┬───────┤       ├───────┤       │       ├───────┐                          ┌───────┤       │       ├───────┤       ├───────┬─────────┐
+ *           │        │!import│       │       ├───────┤       │       │                          │       │       ├───────┤       │       │       │         │
+ *           │        │    ant├───────┤   #   │       ├───────┤   _   │                          │   +   ├───────┤       │   *   ├───────┤       │(Adjust) │
+ *           ├────────┼───────┤       ├───────┤   $   │       ├───────┤                          ├───────┤       │   &   ├───────┤       ├───────┼─────────┤
+ *           │        │       │   @   │       ├───────┤   %   │       │                          │       │   ^   ├───────┤       │   (   │       │         │
+ *           │        │   !   ├───────┤   (   │       ├───────┤   ~   │                          │   |   ├───────┤       │       ├───────┤   )   │ Bkspace │
+ *           ├────────┼───────┤ Save4 ├───────┤   )   │       ├───────┤                          ├───────┤       │   `   ├───────┤       ├───────┼─────────┤
+ *           │        │       │  Web  │       ├───────┤       │       │                          │       │   =   ├───────┤       │       │       │    "    │
+ *           │  CAPS  │       ├───────┤   {   │       ├───────┤   [   │                          │   ]   ├───────┤       │       ├───────┤       │    '    │
+ *           ├────────┼───────┤       ├───────┤   }   │       ├───────┤                          ├───────┤       │   ~   ├───────┤       ├───────┼─────────┤
+ *           │        │       │       │       ├───────┤       │ MS    │                          │  MS   │   +   ├───────┤       │       │   |   │         │
+ *           │        │       ├───────┤ (ALT) │       ├───────┤ LCLK  │                          │  RCLK ├───────┤       │       ├───────┤   \   │         │
+ *           └────────┴───────┤ Scrn  ├───────┤ (RSE) │ Space ├───────┤                          ├───────┤       │ (LWR) ├───────┤       ├───────┴─────────┘
+ *                            │ Grab  │       └───────┤(Shift)│       │                          │  -_   │ Space ├───────┘       │       │
+ *                            └───⍥───┘               └───────┤(NUMRW)│                          │(NUMRW)├───────┘               └───⍥───┘
+ *                                                            └───────┘                          └───────┘
+ */
 [_LOWER] = LAYOUT_rockon_bp(
-    XXXXXXX,  KC_IMP,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_TILD,                          KC_PIPE,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-    XXXXXXX,  KC_EXLM,  KC_AT,    KC_HASH,  KC_DLR,   KC_PERC,  KC_UNDS,                          KC_PLUS,  KC_CIRC,  KC_AMPR,  KC_ASTR,  KC_LPRN,  KC_RPRN,  _______,
-    KC_CAPS,  XXXXXXX,  THECLAW,  KC_LPRN,  KC_RPRN,  XXXXXXX,  KC_LBRC,                          KC_RBRC,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-    _______,  XXXXXXX,  XXXXXXX,  KC_LCBR,  KC_RCBR,  XXXXXXX,  _______,                          _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BSLS,  XXXXXXX,
+    XXXXXXX,  KC_IMP,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_UNDS,                          KC_PLUS,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    XXXXXXX,  KC_EXLM,  KC_AT,    KC_HASH,  KC_DLR,   KC_PERC,  KC_TILD,                          KC_PIPE,  KC_CIRC,  KC_AMPR,  KC_ASTR,  KC_LPRN,  KC_RPRN,  _______,
+    KC_CAPS,  XXXXXXX,  THECLAW,  KC_LPRN,  KC_RPRN,  XXXXXXX,  KC_LBRC,                          KC_RBRC,  KC_EQL,   KC_GRV,   XXXXXXX,  XXXXXXX,  _______,  _______,
+    _______,  XXXXXXX,  XXXXXXX,  KC_LCBR,  KC_RCBR,  XXXXXXX,  _______,                          _______,  KC_PLUS,  KC_TILD,  XXXXXXX,  XXXXXXX,  KC_BSLS,  XXXXXXX,
                         XXXXXXX,  _______,  _______,  _______,  _______,   SCRNCAP,    GITAPP,    _______,  _______,  _______,  _______,  XXXXXXX
 ),
 
+/* _RAISE Keymap
+ *                                    ┌───────┐                                                                          ┌───────┐
+ *                                    │       ├───────┐                                                          ┌───────┤       │
+ *                            ┌───────┤       │       ├───────┐                                          ┌───────┤       │       ├───────┐
+ *           ┌────────┬───────┤       ├───────┤       │       ├───────┐                          ┌───────┤       │       ├───────┤       ├───────┬─────────┐
+ *           │        │       │       │       ├───────┤       │       │                          │       │       ├───────┤       │       │       │         │
+ *           │        │       ├───────┤       │       ├───────┤       │                          │       ├───────┤ Prev  │  Up   ├───────┤       │         │
+ *           ├────────┼───────┤       ├───────┤       │       ├───────┤                          ├───────┤ Page  │ Word  ├───────┤ Next  ├───────┼─────────┤
+ *           │ SHIFT/ │       │       │       ├───────┤       │       │                          │       │ Top   ├───────┤       │ Word  │       │         │
+ *           │  TAB   │       ├───────┤       │       ├───────┤       │                          │       ├───────┤       │ Down  ├───────┤       │ Delete  │
+ *           ├────────┼───────┤       ├───────┤       │       ├───────┤                          ├───────┤       │ Left  ├───────┤       ├───────┼─────────┤
+ *           │        │       │       │       ├───────┤       │       │                          │       │       ├───────┤       │ Right │       │         │
+ *           │ UNDO   │ REDO  ├───────┤       │       ├───────┤       │                          │       ├───────┤ Line  │       ├───────┤       │         │
+ *           ├────────┼───────┤       ├───────┤       │       ├───────┤                          ├───────┤ Page  │ Beg   ├───────┤ Line  ├───────┼─────────┤
+ *           │        │       │       │       ├───────┤       │       │                          │       │ Bot   ├───────┤       │ End   │       │ (Shift) │
+ *           │ (CTRL) │       ├───────┤ (ALT) │       ├───────┤       │                          │       ├───────┤       │ (ALT) ├───────┤       │  Enter  │
+ *           └────────┴───────┤       ├───────┤ (RSE) │ Space ├───────┤                          ├───────┤       │ (LWR) ├───────┤       ├───────┴─────────┘
+ *                            │       │       └───────┤(Shift)│       │                          │  -_   │ Space ├───────┘       │       │
+ *                            └───⍥───┘               └───────┤(NUMRW)│                          │(NUMRW)├───────┘               └───⍥───┘
+ *                                                            └───────┘                          └───────┘
+ */
 
 [_RAISE] = LAYOUT_rockon_bp(
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                          XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
@@ -93,6 +159,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 
+/* _ADJUST Keymap
+ *                                    ┌───────┐                                                                          ┌───────┐
+ *                                    │       ├───────┐                                                          ┌───────┤       │
+ *                            ┌───────┤  F3   │       ├───────┐                                          ┌───────┤       │  F8   ├───────┐
+ *           ┌────────┬───────┤       ├───────┤  F4   │       ├───────┐                          ┌───────┤       │  F7   ├───────┤       ├───────┬─────────┐
+ *           │        │       │  F2   │ W Top ├───────┤  F5   │  RGB  │                          │ RGB   │  F6   ├───────┤ W Top │  F9   │       │         │
+ *           │ RESET  │  F1   ├───────┤ Third │       ├───────┤  I/O  │                          │ SAT+  ├───────┤       │ Half  ├───────┤  F10  │(Adjust) │
+ *           ├────────┼───────┤ Show  ├───────┤       │       ├───────┤                          ├───────┤       │       ├───────┤       ├───────┼─────────┤
+ *           │        │       │ Wndws │ W Ful ├───────┤       │  RGB  │                          │ RGB   │       ├───────┤ W     │  F11  │       │         │
+ *           │        │       ├───────┤ Scrn  │ W Rght├───────┤  STEP-│                          │ STEP+ ├───────┤ W Lft │ Cntr  ├───────┤  F12  │         │
+ *           ├────────┼───────┤ W Lft ├───────┤ Third │       ├───────┤                          ├───────┤       │ Half  ├───────┤ W Rght├───────┼─────────┤
+ *           │        │       │ Third │ W Bot ├───────┤       │  RGB  │                          │ RGB   │       ├───────┤ W Bot │ Half  │       │         │
+ *           │        │       ├───────┤ Third │       ├───────┤  HUE- │                          │ HUE+  ├───────┤       │ Half  ├───────┤       │         │
+ *           ├────────┼───────┤       ├───────┤       │       ├───────┤                          ├───────┤       │       ├───────┤       ├───────┼─────────┤
+ *           │        │       │       │       ├───────┤       │  RGB  │                          │ RGB   │       ├───────┤       │       │       │         │
+ *           │ (CTRL) │       ├───────┤ (ALT) │       ├───────┤  VAL- │                          │ VAL+  ├───────┤       │ (ALT) ├───────┤       │         │
+ *           └────────┴───────┤       ├───────┤ (RSE) │ Space ├───────┤                          ├───────┤       │ (LWR) ├───────┤       ├───────┴─────────┘
+ *                            │       │       └───────┤(Shift)│  RGB  │                          │ RGB   │ Space ├───────┘       │       │
+ *                            └───⍥───┘               └───────┤  SPD- │                          │ SPD+  ├───────┘               └───⍥───┘
+ *                                                            └───────┘                          └───────┘
+ */
 [_ADJUST] = LAYOUT_rockon_bp(
     RESET,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    RGB_TOG,                          RGB_SAI,  KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   _______,
     XXXXXXX,  XXXXXXX,  W_SHOW,   W_TTHRD,  XXXXXXX,  XXXXXXX,  RGB_RMOD,                         RGB_MOD,  XXXXXXX,  XXXXXXX,  W_THALF,  KC_F11,   KC_F12,   XXXXXXX,
@@ -102,11 +189,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 
+
+/*
+ *  _NUM Keymap
+ *                                    ┌───────┐                                                                          ┌───────┐
+ *                                    │       ├───────┐                                                          ┌───────┤       │
+ *                            ┌───────┤       │       ├───────┐                                          ┌───────┤       │       ├───────┐
+ *           ┌────────┬───────┤       ├───────┤       │       ├───────┐                          ┌───────┤       │       ├───────┤       ├───────┬─────────┐
+ *           │        │       │       │       ├───────┤       │       │                          │       │       ├───────┤       │       │       │         │
+ *           │        │       ├───────┤   3   │       ├───────┤   -   │                          │   =   ├───────┤       │   8   ├───────┤       │         │
+ *           ├────────┼───────┤       ├───────┤   4   │       ├───────┤                          ├───────┤       │   7   ├───────┤       ├───────┼─────────┤
+ *           │        │       │   2   │       ├───────┤   5   │       │                          │       │   6   ├───────┤       │   9   │       │         │
+ *           │        │   1   ├───────┤   8   │       ├───────┤   +   │                          │       ├───────┤       │       ├───────┤   0   │ Bkspace │
+ *           ├────────┼───────┤       ├───────┤   9   │       ├───────┤                          ├───────┤       │       ├───────┤       ├───────┼─────────┤
+ *           │        │       │   7   │       ├───────┤   0   │       │                          │       │       ├───────┤       │       │       │    "    │
+ *           │        │   6   ├───────┤       │       ├───────┤   =   │                          │       ├───────┤       │       ├───────┤   :   │    '    │
+ *           ├────────┼───────┤       ├───────┤   ,   │       ├───────┤                          ├───────┤       │       ├───────┤       ├───────┼─────────┤
+ *           │        │       │       │       ├───────┤   .   │       │                          │       │       ├───────┤       │       │       │         │
+ *           │        │       ├───────┤ (ALT) │       ├───────┤       │                          │       ├───────┤       │ (ALT) ├───────┤       │  Enter  │
+ *           └────────┴───────┤       ├───────┤ (RSE) │ Space ├───────┤                          ├───────┤       │ (LWR) ├───────┤       ├───────┴─────────┘
+ *                            │       │       └───────┤(Shift)│ Enter │                          │  -_   │ Space ├───────┘       │       │
+ *                            └───⍥───┘               └───────┤(NUMRW)│                          │(NUMRW)├───────┘               └───⍥───┘
+ *                                                            └───────┘                          └───────┘
+ */
 [_NUM] = LAYOUT_rockon_bp(
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,                          _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,
-    XXXXXXX,  KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_MINS,                          KC_EQL,   KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     _______,
-    XXXXXXX,  KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_PLUS,                          XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  _______,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_COMM,  KC_DOT,   KC_EQL,                           XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  _______,  _______,  _______,
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_MINS,                          KC_EQL,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,
+    XXXXXXX,  KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_PLUS,                          XXXXXXX,  KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     _______,
+    XXXXXXX,  KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_EQL,                           XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_COLN,  _______,
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_COMM,  KC_DOT,   XXXXXXX,                          XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  _______,  _______,  _______,
                         _______,  _______,  _______,  _______,  _______,   CALCAPP,    CALCAPP,   _______,  _______,  _______,  _______,  _______
 )
 };
